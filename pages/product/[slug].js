@@ -8,7 +8,9 @@ import {
 } from '../../src/queries/product-by-slug';
 import { isEmpty } from 'lodash';
 import GalleryCarousel from '../../src/components/single-product/gallery-carousel';
-import Price from '../../src/components/single-product/price';
+import ProductDescripton from '../../src/components/ProductDescripton';
+import ProductRecomendation from '../../src/components/ProductRecomendation';
+// import Price from '../../src/components/single-product/price';
 
 export default function Product(props) {
   const { product } = props;
@@ -24,11 +26,13 @@ export default function Product(props) {
   return (
     <Layout>
       {product ? (
-        <div className="single-product container mx-auto my-32 px-4 xl:px-0">
+        <div className="single-product container mx-auto mt-32 mb-20 px-4 lg:px-56">
           <div className="grid md:grid-cols-2 gap-4">
             <div className="product-images">
               {!isEmpty(product?.galleryImages?.nodes) ? (
-                <GalleryCarousel gallery={product?.galleryImages?.nodes} />
+                <>
+                  <GalleryCarousel gallery={product?.galleryImages?.nodes} />
+                </>
               ) : !isEmpty(product.image) ? (
                 <img
                   src={product?.image?.sourceUrl}
@@ -40,22 +44,43 @@ export default function Product(props) {
               ) : null}
             </div>
             <div className="product-info">
-              <h4 className="products-main-title text-2xl uppercase">
+              <h4 className="products-main-title text-2xl font-bold ">
                 {product.name}
               </h4>
+              <hr className="border-t-2 border-dashed border-black my-4" />
               <div
                 dangerouslySetInnerHTML={{
-                  __html: product.description,
+                  __html: product.shortDescription,
                 }}
                 className="product-description mb-5"
               />
-              <Price
+              {/* <Price
                 salesPrice={product?.price}
                 regularPrice={product?.regularPrice}
-              />
-              <AddToCartButton product={product} />
+              /> */}
+              <div className="mb-4">
+                <div className="text-primary line-through">
+                  {product?.regularPrice}
+                </div>
+                <div className="text-4xl text-primary font-bold">
+                  {product?.price}
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="font-semibold">
+                    Kategori :{' '}
+                    <span className="font-normal">
+                      {product.productCategories?.nodes?.[0]?.name}
+                    </span>
+                  </p>
+                </div>
+                <AddToCartButton product={product} />
+              </div>
             </div>
           </div>
+          <ProductDescripton product={product} />
+          <ProductRecomendation />
         </div>
       ) : (
         ''

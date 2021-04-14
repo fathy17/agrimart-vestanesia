@@ -31,7 +31,7 @@ const Price = ({ regularPrice = 0, salesPrice }) => {
           : null,
       strikeThroughClass:
         formattedSalesPrice < formattedRegularPrice
-          ? 'product-regular-price mr-2 line-through text-sm text-gray-600 font-normal'
+          ? 'product-regular-price line-through text-xs text-primary font-normal'
           : '',
     };
   };
@@ -39,20 +39,20 @@ const Price = ({ regularPrice = 0, salesPrice }) => {
   const productMeta = discountPercent(regularPrice, salesPrice);
 
   return (
-    <h6 className="product-price text-gray-800 font-semibold mr-3 mb-5">
+    <div className="product-price font-semibold ">
+      {/* Discounted price */}
+      <div className={productMeta?.strikeThroughClass}>{regularPrice}</div>
+
       {/* Regular price */}
       {productMeta?.discountPercent ? (
-        <span className="product-price mr-2">{salesPrice}</span>
+        <div className="product-price text-primary font-bold">{salesPrice}</div>
       ) : null}
 
-      {/* Discounted price */}
-      <span className={productMeta?.strikeThroughClass}>{regularPrice}</span>
-
       {/* Discount percent */}
-      <span className="product-discount text-green-600 font-bold text-sm font-normal">
+      {/* <span className="product-discount text-green-600 font-bold text-sm ">
         {productMeta?.discountPercent}
-      </span>
-    </h6>
+      </span> */}
+    </div>
   );
 };
 

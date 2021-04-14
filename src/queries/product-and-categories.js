@@ -40,7 +40,6 @@ const PRODUCTS_AND_CATEGORIES_QUERY = gql`
     products(where: { type: SIMPLE }, first: 4) {
       nodes {
         id
-        productId
         averageRating
         slug
         description
@@ -50,6 +49,11 @@ const PRODUCTS_AND_CATEGORIES_QUERY = gql`
           title
           srcSet
           sourceUrl
+        }
+        productCategories {
+          nodes {
+            name
+          }
         }
         name
         ... on SimpleProduct {

@@ -42,11 +42,11 @@ export const addFirstProduct = (product) => {
  * @param {Object} product Product
  * @param {Integer} productPrice Product Price
  * @param {Integer} qty Quantity
- * @return {{image: *, productId: *, totalPrice: number, price: *, qty: *, name: *}}
+ * @return {{image: *, id: *, totalPrice: number, price: *, qty: *, name: *}}
  */
 export const createNewProduct = (product, productPrice, qty) => {
   return {
-    productId: product.productId,
+    id: product.id,
     image: product.image,
     name: product.name,
     price: productPrice,
@@ -116,10 +116,7 @@ export const getUpdatedProducts = (
   newQty = false
 ) => {
   // Check if the product already exits in the cart.
-  const productExitsIndex = isProductInCart(
-    existingProductsInCart,
-    product.productId
-  );
+  const productExitsIndex = isProductInCart(existingProductsInCart, product.id);
 
   // If product exits ( index of that product found in the array ), update the product quantity and totalPrice
   if (-1 < productExitsIndex) {
@@ -149,12 +146,12 @@ export const getUpdatedProducts = (
  * Returns index of the product if it exists.
  *
  * @param {Object} existingProductsInCart Existing Products.
- * @param {Integer} productId Product id.
+ * @param {Integer} id Product id.
  * @return {number | *} Index Returns -1 if product does not exist in the array, index number otherwise
  */
-const isProductInCart = (existingProductsInCart, productId) => {
+const isProductInCart = (existingProductsInCart, id) => {
   const returnItemThatExits = (item, index) => {
-    if (productId === item.productId) {
+    if (id === item.id) {
       return item;
     }
   };
@@ -168,10 +165,10 @@ const isProductInCart = (existingProductsInCart, productId) => {
 /**
  * Remove Item from the cart.
  *
- * @param {Integer} productId Product Id.
+ * @param {Integer} id Product Id.
  * @return {any | string} Updated cart
  */
-export const removeItemFromCart = (productId) => {
+export const removeItemFromCart = (id) => {
   let existingCart = localStorage.getItem('woo-next-cart');
   existingCart = JSON.parse(existingCart);
 
@@ -182,7 +179,7 @@ export const removeItemFromCart = (productId) => {
   }
 
   // Check if the product already exits in the cart.
-  const productExitsIndex = isProductInCart(existingCart.products, productId);
+  const productExitsIndex = isProductInCart(existingCart.products, id);
 
   // If product to be removed exits
   if (-1 < productExitsIndex) {
@@ -218,6 +215,8 @@ export const getFormattedCart = (data) => {
 
   const givenProducts = data.cart.contents.nodes;
 
+  console.log(givenProducts);
+
   // Create an empty object.
   formattedCart = {};
   formattedCart.products = [];
@@ -228,16 +227,16 @@ export const getFormattedCart = (data) => {
     const product = {};
     const total = getFloatVal(givenProducts[i].total);
 
-    product.productId = givenProduct.productId;
+    product.id = givenProduct.id;
     product.cartKey = givenProducts[i].key;
     product.name = givenProduct.name;
     product.qty = givenProducts[i].quantity;
     product.price = total / product.qty;
     product.totalPrice = givenProducts[i].total;
     product.image = {
-      sourceUrl: givenProduct.image.sourceUrl,
-      srcSet: givenProduct.image.srcSet,
-      title: givenProduct.image.title,
+      sourceUrl: givenProduct?.node?.image?.sourceUrl,
+      srcSet: givenProduct?.node?.image?.srcSet,
+      title: givenProduct?.node?.image?.title,
     };
 
     totalProductsCount += givenProducts[i].quantity;

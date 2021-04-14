@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 const GET_CART = gql`
   query GET_CART {
@@ -7,55 +7,57 @@ const GET_CART = gql`
         nodes {
           key
           product {
-            id
-            productId
-            name
-            description
-            type
-            onSale
-            slug
-            averageRating
-            reviewCount
-            image {
+            node {
               id
-                sourceUrl
-                srcSet
-                altText
-                title       
-            }
-            galleryImages {
-              nodes {
+              databaseId
+              name
+              description
+              type
+              onSale
+              slug
+              averageRating
+              reviewCount
+              image {
                 id
                 sourceUrl
                 srcSet
                 altText
-                title   
+                title
+              }
+              galleryImages {
+                nodes {
+                  id
+                  sourceUrl
+                  srcSet
+                  altText
+                  title
+                }
               }
             }
-
           }
           variation {
-            id
-            variationId
-            name
-            description
-            type
-            onSale
-            price
-            regularPrice
-            salePrice
-            image {
+            node {
               id
-              sourceUrl
-              srcSet
-              altText
-              title      
-            }
-            attributes {
-              nodes {
+              name
+              description
+              type
+              onSale
+              price
+              regularPrice
+              salePrice
+              image {
                 id
-                name
-                value
+                sourceUrl
+                srcSet
+                altText
+                title
+              }
+              attributes {
+                nodes {
+                  id
+                  name
+                  value
+                }
               }
             }
           }
@@ -66,23 +68,9 @@ const GET_CART = gql`
         }
       }
       appliedCoupons {
-        nodes {
-          id
-          couponId
-          discountType
-          amount
-          dateExpiry
-          products {
-            nodes {
-              id
-            }
-          }
-          productCategories {
-            nodes {
-              id
-            }
-          }
-        }
+        code
+        discountAmount
+        discountTax
       }
       subtotal
       subtotalTax

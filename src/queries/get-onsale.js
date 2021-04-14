@@ -8,7 +8,7 @@ const GET_ONSALE_QUERY = gql`
     products(where: { onSale: true }, first: 3) {
       nodes {
         id
-        productId
+        id
         averageRating
         slug
         description

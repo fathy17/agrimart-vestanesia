@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 /**
  * Update Cart
@@ -7,54 +7,57 @@ import gql from "graphql-tag";
  * When the cart item needs to be deleted, we should pass quantity as 0 in the input along with other fields.
  */
 const UPDATE_CART = gql`
-  mutation ($input: UpdateItemQuantitiesInput!) {
+  mutation($input: UpdateItemQuantitiesInput!) {
     updateItemQuantities(input: $input) {
-		items {
+      items {
         key
         product {
-          id
-          productId
-          name
-          description
-          type
-          onSale
-          slug
-          averageRating
-          reviewCount
-          image {
+          node {
             id
-            sourceUrl
-            altText      
-          }
-          galleryImages {
-            nodes {
+            databaseId
+            name
+            description
+            type
+            onSale
+            slug
+            averageRating
+            reviewCount
+            image {
               id
               sourceUrl
               altText
             }
+            galleryImages {
+              nodes {
+                id
+                sourceUrl
+                altText
+              }
+            }
           }
         }
         variation {
-          id
-          variationId
-          name
-          description
-          type
-          onSale
-          price
-          regularPrice
-          salePrice
-          image {
+          node {
             id
-            sourceUrl
-            altText      
-          }
-              attributes {
-            nodes {
+            name
+            description
+            type
+            onSale
+            price
+            regularPrice
+            salePrice
+            image {
               id
-          attributeId
-              name
-              value
+              sourceUrl
+              altText
+            }
+            attributes {
+              nodes {
+                id
+                attributeId
+                name
+                value
+              }
             }
           }
         }
@@ -66,23 +69,29 @@ const UPDATE_CART = gql`
       removed {
         key
         product {
-          id
-              productId
+          node {
+            id
+            databaseId
+          }
         }
         variation {
-          id
-          variationId
+          node {
+            id
+          }
         }
       }
       updated {
         key
         product {
-          id
-      productId
+          node {
+            id
+            databaseId
+          }
         }
         variation {
-          id
-          variationId
+          node {
+            id
+          }
         }
       }
     }

@@ -7,13 +7,14 @@ import { v4 } from 'uuid';
 import GET_CART from '../../queries/get-cart';
 import ADD_TO_CART from '../../mutations/add-to-cart';
 import { ErrorContext } from '../context/ErrorContext';
+import Loader from '../Loader';
 
 const AddToCart = (props) => {
   const { product } = props;
 
   const productQryInput = {
     clientMutationId: v4(), // Generate a unique id.
-    productId: product.productId,
+    productId: product.databaseId,
   };
 
   const [cart, setCart] = useContext(AppContext);
@@ -115,35 +116,32 @@ const AddToCart = (props) => {
 
   return (
     <div>
-      {/* Add To Cart Loading*/}
-      {addToCartLoading && <p>Adding to Cart...</p>}
-
       {/*	Check if its an external product then put its external buy link */}
       {'ExternalProduct' === product.__typename ? (
         <a
           href={product.externalUrl}
           target="_blank"
-          className="px-3 py-1 rounded-sm mr-3 text-sm border-solid border border-current inline-block hover:bg-purple-600 hover:text-white hover:border-purple-600"
+          className="px-4 py-2 font-semibold rounded-sm mr-3 text-sm bg-primary hover:bg-green-600 inline-block  text-white"
         >
           Buy now
         </a>
       ) : (
         <button
           onClick={handleAddToCartClick}
-          className="px-3 py-1 rounded-sm mr-3 text-sm border-solid border border-current hover:bg-purple-600 hover:text-white hover:border-purple-600"
+          className="px-4 py-2 font-semibold rounded-sm mr-3 text-sm bg-primary hover:bg-green-600  text-white"
         >
-          Add to cart
+          {addToCartLoading ? <Loader size={16} /> : 'Tambahkan ke keranjang'}
         </button>
       )}
-      {showViewCart ? (
+      {/* {showViewCart ? (
         <Link href="/cart">
-          <button className="px-3 py-1 rounded-sm text-sm border-solid border border-current inline-block hover:bg-purple-600 hover:text-white hover:border-purple-600">
+          <button className="px-4 py-2 font-semibold rounded-sm text-sm bg-primary hover:bg-green-600 inline-block  text-white">
             View Cart
           </button>
         </Link>
       ) : (
         ''
-      )}
+      )} */}
     </div>
   );
 };

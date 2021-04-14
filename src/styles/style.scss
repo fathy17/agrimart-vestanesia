@@ -1,6 +1,12 @@
+body {
+  background-color: #ffffff;
+}
+
 .product {
   img {
     width: 100%;
+    height: 15rem;
+    object-fit: cover;
   }
 }
 
@@ -11,8 +17,7 @@
 .banner {
   img {
     width: 100%;
-    height: 400px;
-    object-fit: cover;
+    height: 36rem;
     object-position: 50% 50%;
   }
 }
@@ -41,7 +46,7 @@
 
 .banner-img {
   position: relative;
-  height: 400px;
+  height: 36rem;
 }
 
 .slider-button {
@@ -88,40 +93,44 @@
   }
 }
 
-.main-title {
-  position: relative;
-  text-align: center;
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: 50%;
-    left: 0;
-    height: 2px;
-    width: 50%;
-    background: #222;
-    z-index: -1;
-  }
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 50%;
-    right: 0;
-    height: 2px;
-    width: 50%;
-    background: #222;
-    z-index: -1;
-  }
-}
-
-.main-title-inner {
-  background: #fff;
-  padding: 0 20px;
-}
-
 .woo-next-cart-qty {
   input {
     border: 1px solid #ccc;
     text-align: center;
     border-radius: 4px;
+  }
+}
+
+.star {
+  color: #ff9933;
+  cursor: pointer;
+}
+
+.loader {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader circle {
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
   }
 }

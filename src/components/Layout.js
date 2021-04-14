@@ -17,7 +17,7 @@ const Layout = (props) => {
     <AppProvider>
       <ErrorProvider>
         <ApolloProvider client={client}>
-          <div>
+          <div className="font-sans">
             <Head>
               <title>Woocommerce React Theme</title>
             </Head>

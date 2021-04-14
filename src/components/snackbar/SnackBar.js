@@ -9,6 +9,9 @@ export default function SnackBar() {
       window.localStorage.removeItem('woo-session');
       window.localStorage.removeItem('woo-next-cart');
     }
+    setInterval(function () {
+      setError(null);
+    }, 3000);
   }, []);
 
   return (
@@ -18,17 +21,17 @@ export default function SnackBar() {
     >
       <div
         className={`w-8/12 md:w-5/12 lg:w-5/12 ${
-          error.item ? 'bg-green-400' : 'bg-yellow-400'
-        } py-3 px-10 rounded-lg text-gray-800 flex justify-between `}
+          error.item ? 'bg-primary' : 'bg-yellow-400'
+        } py-3 px-10 rounded-lg text-gray-100 flex justify-between `}
       >
         <p>
           {error.item ? (
             <>
               <span className="font-bold">{error.item} </span>
-              has added to your cart.
+              telah ditambahkan ke keranjang.
             </>
           ) : (
-            'Failed! Try again.'
+            'Terjadi kesalahan! Coba lagi.'
           )}
         </p>
         <span

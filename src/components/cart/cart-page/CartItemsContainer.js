@@ -162,7 +162,7 @@ const CartItemsContainer = () => {
                 {cart.products.length &&
                   cart.products.map((item) => (
                     <CartItem
-                      key={item.productId}
+                      key={item.id}
                       item={item}
                       updateCartProcessing={updateCartProcessing}
                       products={cart.products}

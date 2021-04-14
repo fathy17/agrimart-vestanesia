@@ -5,13 +5,18 @@ import { gql } from '@apollo/client';
  */
 const GET_TOPSELL_QUERY = gql`
   query {
-    products(where: { orderby: { field: TOTAL_SALES } }, first: 3) {
+    products(where: { orderby: { field: TOTAL_SALES } }, first: 4) {
       nodes {
         id
-        productId
+        id
         averageRating
         slug
         description
+        productCategories {
+          nodes {
+            name
+          }
+        }
         image {
           id
           uri

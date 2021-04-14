@@ -8,7 +8,7 @@ const HeroCarousel = ({ heroCarousel }) => {
   }
 
   const autoPlay = true;
-  const slideDuration = 3; // in seconds
+  const slideDuration = 5; // in seconds
   const activeIndexRef = useRef({ activeIndex: 0 });
   const slideRef = useRef(0);
   const [slide, setSlide] = useState(0);
@@ -49,8 +49,8 @@ const HeroCarousel = ({ heroCarousel }) => {
   }, []);
 
   return (
-    <div className="banner flex flex-col sm:flex-row justify-between overflow-hidden">
-      <div className="banner-img sm:w-8/12">
+    <div className="banner flex flex-col sm:flex-row justify-between overflow-hidden mt-20 lg:mx-56">
+      <div className="banner-img w-full">
         {heroCarousel.map((item, index) => {
           const opacity =
             activeIndex === index || 1 === heroCarousel.length
@@ -65,6 +65,7 @@ const HeroCarousel = ({ heroCarousel }) => {
                 src={item?.image?.sourceUrl}
                 srcSet={item?.image?.srcSet}
                 loading="lazy"
+                className="object-contain lg:object-cover"
               />
             </div>
           );
@@ -79,12 +80,7 @@ const HeroCarousel = ({ heroCarousel }) => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M7 16l-4-4m0 0l4-4m-4 4h18"
-              />
+              <path strokeWidth="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
             </svg>
           </button>
           <button className="focus:outline-none" onClick={nextSlide}>
@@ -96,26 +92,10 @@ const HeroCarousel = ({ heroCarousel }) => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
+              <path strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>
         </div>
-      </div>
-      <div className="banner-content pt-10 sm:pt-0 px-10 sm:w-4/12">
-        <h2 className="banner-content__title text-base md:text-4xl uppercase">
-          {heroCarousel[activeIndex]?.name}
-        </h2>
-        <p className="banner-content__description text-base md:text-2xl text-gray-700">
-          {heroCarousel[activeIndex]?.description}
-        </p>
-        <Link href={`/category/${heroCarousel[activeIndex]?.slug}/`}>
-          <a className="banner-content__link text-gray-700">+ Explore</a>
-        </Link>
       </div>
     </div>
   );
