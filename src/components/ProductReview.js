@@ -28,7 +28,7 @@ export default function ProductReview({ id }) {
       onError: (error) => {
         if (error) {
           const errorMessage = error?.graphQLErrors?.[0]?.message
-            ? error.graphQLErrors[0].message
+            ? error?.graphQLErrors?.[0]?.message
             : '';
           setError(errorMessage);
         }
@@ -53,7 +53,7 @@ export default function ProductReview({ id }) {
     onError: (error) => {
       if (error) {
         const errorMessage = error?.graphQLErrors?.[0]?.message
-          ? error.graphQLErrors[0].message
+          ? error?.graphQLErrors?.[0]?.message
           : '';
         setError(errorMessage);
       }
@@ -76,9 +76,6 @@ export default function ProductReview({ id }) {
       },
     });
   };
-
-  console.log(reviews);
-  console.log(starValue);
 
   return (
     <>

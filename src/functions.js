@@ -215,8 +215,6 @@ export const getFormattedCart = (data) => {
 
   const givenProducts = data.cart.contents.nodes;
 
-  console.log(givenProducts);
-
   // Create an empty object.
   formattedCart = {};
   formattedCart.products = [];
@@ -227,9 +225,10 @@ export const getFormattedCart = (data) => {
     const product = {};
     const total = getFloatVal(givenProducts[i].total);
 
-    product.id = givenProduct.id;
+    product.id = givenProduct.node.id;
+    product.productId = givenProduct.node.databaseId;
     product.cartKey = givenProducts[i].key;
-    product.name = givenProduct.name;
+    product.name = givenProduct.node.name;
     product.qty = givenProducts[i].quantity;
     product.price = total / product.qty;
     product.totalPrice = givenProducts[i].total;
@@ -245,7 +244,11 @@ export const getFormattedCart = (data) => {
     formattedCart.products.push(product);
   }
 
+  formattedCart.shippingTotal = data.cart.shippingTotal;
+  formattedCart.shippingMethods =
+    data.cart.availableShippingMethods[0].rates || [];
   formattedCart.totalProductsCount = totalProductsCount;
+  formattedCart.subTotal = data.cart.subtotal;
   formattedCart.totalProductsPrice = data.cart.total;
 
   return formattedCart;
@@ -281,10 +284,11 @@ export const createCheckoutData = (order) => {
       phone: order.phone,
       company: order.company,
     },
-    shipToDifferentAddress: false,
     paymentMethod: order.paymentMethod,
+    shippingMethod: order.shippingMethod,
     isPaid: false,
     transactionId: v4(),
+    customerNote: order.customerNote,
   };
 
   return checkoutData;

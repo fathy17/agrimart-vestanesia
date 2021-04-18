@@ -1,3 +1,25 @@
+// Scrollbar Web
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11);
+  border-radius: 1rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(204, 131, 5);
+}
+
 body {
   background-color: #ffffff;
 }
@@ -74,9 +96,6 @@ body {
 .cart-products,
 .checkout-cart {
   th,
-  td {
-    padding: 10px 0;
-  }
   tr {
     border-bottom: 1px solid #ccc;
   }
@@ -101,6 +120,8 @@ body {
   }
 }
 
+// Star Rating
+
 .star {
   color: #ff9933;
   cursor: pointer;
@@ -115,6 +136,8 @@ body {
     transform: rotate(360deg);
   }
 }
+
+//Loader
 
 .loader circle {
   animation: dash 1.5s ease-in-out infinite;
@@ -132,5 +155,66 @@ body {
   100% {
     stroke-dasharray: 90, 150;
     stroke-dashoffset: -124;
+  }
+}
+
+// Modal
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999;
+  display: flex;
+  // align-items: center;
+  // justify-content: center;
+  justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.25);
+  animation-name: appear;
+  animation-duration: 300ms;
+}
+
+.modal-dialog {
+  width: 100%;
+  // max-width: 550px;
+  background: white;
+  position: relative;
+  right: 0;
+  top: 0;
+  // max-height: calc(100vh - 40px);
+  height: 100vh;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slide-in;
+  animation-duration: 0.5s;
+}
+
+.modal-body {
+  overflow: auto;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }

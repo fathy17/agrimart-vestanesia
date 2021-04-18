@@ -51,8 +51,46 @@ const CartItem = ({
   };
 
   return (
-    <tr className="woo-next-cart-item" key={item.id}>
-      <th className="woo-next-cart-element woo-next-cart-el-close">
+    <div
+      className="woo-next-cart-item flex items-center justify-between border-primary border-b-2 py-4"
+      key={item.id}
+    >
+      <div className="woo-next-cart-element">
+        <img
+          width="64"
+          src={item.image.sourceUrl}
+          srcSet={item.image.srcSet}
+          alt={item.image.title}
+        />
+      </div>
+
+      {/* Qty Input */}
+      <div className="flex-grow mx-4">
+        <div className="woo-next-cart-element font-semibold mb-4">
+          {item.name}
+        </div>
+        {/* <div>{item.price}/Pcs</div> */}
+        <div className="woo-next-cart-element woo-next-cart-qty">
+          {/* @TODO Need to update this with graphQL query */}
+          <input
+            type="number"
+            min="1"
+            data-cart-key={item.cartKey}
+            className={`woo-next-cart-qty-input form-control w-16 ${
+              updateCartProcessing ? 'opacity-25 cursor-not-allowed' : ''
+            } `}
+            value={productCount}
+            onChange={(event) => handleQtyChange(event, item.cartKey)}
+          />{' '}
+          Pcs
+        </div>
+      </div>
+      <div className="woo-next-cart-element mr-4">
+        {'string' !== typeof item.totalPrice
+          ? item.totalPrice.toFixed(2)
+          : item.totalPrice}
+      </div>
+      <div className="woo-next-cart-element woo-next-cart-el-close">
         {/* Remove item */}
         <span
           className="woo-next-cart-close-icon cursor-pointer"
@@ -62,40 +100,8 @@ const CartItem = ({
         >
           <Cross />
         </span>
-      </th>
-      <td className="woo-next-cart-element">
-        <img
-          width="64"
-          src={item.image.sourceUrl}
-          srcSet={item.image.srcSet}
-          alt={item.image.title}
-        />
-      </td>
-      <td className="woo-next-cart-element">{item.name}</td>
-      <td className="woo-next-cart-element">
-        {'string' !== typeof item.price ? item.price.toFixed(2) : item.price}
-      </td>
-
-      {/* Qty Input */}
-      <td className="woo-next-cart-element woo-next-cart-qty">
-        {/* @TODO Need to update this with graphQL query */}
-        <input
-          type="number"
-          min="1"
-          data-cart-key={item.cartKey}
-          className={`woo-next-cart-qty-input form-control ${
-            updateCartProcessing ? 'opacity-25 cursor-not-allowed' : ''
-          } `}
-          value={productCount}
-          onChange={(event) => handleQtyChange(event, item.cartKey)}
-        />
-      </td>
-      <td className="woo-next-cart-element">
-        {'string' !== typeof item.totalPrice
-          ? item.totalPrice.toFixed(2)
-          : item.totalPrice}
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 };
 

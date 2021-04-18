@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon app.js",
+    "dev": "node app.js",
     "build": "next build",
     "start": "NODE_ENV=production node app.js",
     "export": "next build && next export",
@@ -12,11 +12,13 @@
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "@svgr/cli": "^5.5.0",
+    "axios": "^0.21.1",
     "graphql": "^15.4.0",
     "lodash": "^4.17.20",
     "next": "10.0.1",
     "node-fetch": "^2.6.1",
     "nprogress": "^0.2.0",
+    "rajaongkir-nodejs": "^0.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "sass": "^1.29.0",

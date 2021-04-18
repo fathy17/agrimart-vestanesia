@@ -15,6 +15,12 @@ const YourOrder = ({ cart }) => {
                   Product
                 </th>
                 <th className="woo-next-cart-heading-el" scope="col">
+                  Qty
+                </th>
+                <th
+                  className="woo-next-cart-heading-el text-right pr-4"
+                  scope="col"
+                >
                   Total
                 </th>
               </tr>
@@ -24,13 +30,36 @@ const YourOrder = ({ cart }) => {
                 cart.products.map((item) => (
                   <CheckoutCartItem key={item.id} item={item} />
                 ))}
-              {/*Total*/}
+              {/*SubTotal*/}
               <tr className="bg-gray-200">
-                <td className="" />
-                <td className="woo-next-checkout-total font-normal text-xl">
+                <td className="py-2" />
+                <td className="woo-next-checkout-total font-normal text-xl py-2">
                   Subtotal
                 </td>
-                <td className="woo-next-checkout-total font-bold text-xl">
+                <td className="woo-next-checkout-total font-normal text-xl"></td>
+                <td className="woo-next-checkout-total font-semibold text-xl text-right pr-4">
+                  {cart.subTotal}
+                </td>
+              </tr>
+              {/*Pengiriman*/}
+              <tr className="bg-gray-200">
+                <td className="py-2" />
+                <td className="woo-next-checkout-total font-normal text-xl py-2">
+                  Biaya Pengiriman
+                </td>
+                <td className="woo-next-checkout-total font-normal text-xl"></td>
+                <td className="woo-next-checkout-total font-semibold text-xl text-right pr-4">
+                  {cart.shippingTotal}
+                </td>
+              </tr>
+              {/*Pengiriman*/}
+              <tr className="bg-gray-200">
+                <td className="py-2" />
+                <td className="woo-next-checkout-total font-normal text-xl py-2">
+                  Total
+                </td>
+                <td className="woo-next-checkout-total font-normal text-xl"></td>
+                <td className="woo-next-checkout-total font-bold text-xl text-right pr-4">
                   {cart.totalProductsPrice}
                 </td>
               </tr>

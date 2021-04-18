@@ -15,8 +15,6 @@
 // 	,"Turkey","Turkmenistan","Turks & Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","United States Minor Outlying Islands","Uruguay"
 // 	,"Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 
-const countryList = [
-	{ countryCode: 'ID', countryName: 'India' }
-];
+const countryList = [{ countryCode: 'ID', countryName: 'Indonesia' }];
 
 export default countryList;

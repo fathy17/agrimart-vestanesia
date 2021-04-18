@@ -87,7 +87,7 @@ const AddToCart = (props) => {
 
       // If error.
       if (addToCartError) {
-        setError(addToCartError.graphQLErrors[0].message);
+        setError(addToCarterror?.graphQLErrors?.[0]?.message);
       }
 
       // On Success:
@@ -103,7 +103,7 @@ const AddToCart = (props) => {
     },
     onError: (error) => {
       if (error) {
-        setError(error.graphQLErrors[0].message);
+        setError(error?.graphQLErrors?.[0]?.message);
       }
     },
   });

@@ -1,7 +1,7 @@
 const CheckoutCartItem = ({ item }) => {
   return (
     <tr className="woo-next-cart-item" key={item.id}>
-      <td className="woo-next-cart-element">
+      <td className="woo-next-cart-element py-2">
         <img
           width="64"
           src={item.image.sourceUrl}
@@ -10,7 +10,10 @@ const CheckoutCartItem = ({ item }) => {
         />
       </td>
       <td className="woo-next-cart-element">{item.name}</td>
-      <td className="woo-next-cart-element">{item.totalPrice}</td>
+      <td className="woo-next-cart-element">{item.qty}</td>
+      <td className="woo-next-cart-element text-right pr-4">
+        {item.totalPrice}
+      </td>
     </tr>
   );
 };

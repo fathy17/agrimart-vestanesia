@@ -8,26 +8,30 @@ import { useMutation, useQuery } from '@apollo/client';
 import { getFormattedCart, createCheckoutData } from '../../functions';
 import OrderSuccess from './OrderSuccess';
 import GET_CART from '../../queries/get-cart';
-import CHECKOUT_MUTATION from '../../mutations/checkout';
 import { ErrorContext } from '../context/ErrorContext';
+import Loader from '../Loader';
+import CHECKOUT_MUTATION from '../../mutations/checkout';
+import ADD_FEE_MUTATION from '../../mutations/add-fee';
+import { v4 } from 'uuid';
+import UPDATE_SHIPPING_METHOD_MUTATION from '../../mutations/update-shipping-method';
+import { useRouter } from 'next/router';
 
 const CheckoutForm = () => {
   // const initialState = {
-  // 	firstName: '',
-  // 	lastName: '',
-  // 	company: '',
-  // 	country: '',
-  // 	address1: '',
-  // 	address2: '',
-  // 	city: '',
-  // 	state: '',
-  // 	postcode: '',
-  // 	phone: '',
-  // 	email: '',
-  // 	createAccount: false,
-  // 	orderNotes: '',
-  // 	paymentMethod: '',
-  // 	errors: null
+  //   firstName: '',
+  //   lastName: '',
+  //   country: 'ID',
+  //   address1: '',
+  //   address2: '',
+  //   city: '',
+  //   state: '',
+  //   postcode: '',
+  //   phone: '',
+  //   email: '',
+  //   createAccount: false,
+  //   orderNotes: '',
+  //   paymentMethod: '',
+  //   errors: null,
   // };
 
   // Use this for testing purposes, so you dont have to fill the checkout form over an over again.
@@ -35,24 +39,28 @@ const CheckoutForm = () => {
     firstName: 'Fathy',
     lastName: 'Sayed',
     address1: '109 Hills Road Valley',
-    address2: 'Station Road',
     city: 'Pune',
     state: 'Maharastra',
     country: 'ID',
     postcode: '400298',
     phone: '9959338989',
-    email: 'imran@gmail.com',
-    company: 'Tech',
+    email: 'andifathyahmadfahrezy@gmail.com',
     createAccount: false,
     orderNotes: '',
-    paymentMethod: 'cod',
+    paymentMethod: 'midtrans',
     errors: null,
+    shippingMethod: null,
+    customerNote: '',
   };
 
   const [cart, setCart] = useContext(AppContext);
   const [_, setError] = useContext(ErrorContext);
   const [input, setInput] = useState(initialState);
-  const [orderData, setOrderData] = useState(null);
+  // const [orderData, setOrderData] = useState(null);
+  const [errorCheckout, setErrorCheckout] = useState(null);
+
+  const router = useRouter();
+
   // Get Cart Data.
   const { loading, error, data, refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
@@ -65,6 +73,7 @@ const CheckoutForm = () => {
 
       // Update cart data in React Context.
       setCart(updatedCart);
+      console.log(data);
     },
   });
 
@@ -74,18 +83,84 @@ const CheckoutForm = () => {
     { data: checkoutResponse, loading: checkoutLoading, error: checkoutError },
   ] = useMutation(CHECKOUT_MUTATION, {
     variables: {
-      input: orderData,
+      input: createCheckoutData(input),
     },
     onCompleted: () => {
-      // console.warn( 'completed CHECKOUT_MUTATION' );
       refetch();
     },
     onError: (error) => {
       if (error) {
-        setError(error.graphQLErrors[0].message);
+        setError(error?.graphQLErrors?.[0]?.message);
+        setErrorCheckout(error?.graphQLErrors?.[0]?.message);
       }
     },
   });
+
+  // Add Fee Mutation
+  const [
+    addfee,
+    { data: adfeeResponse, loading: adfeeLoading, error: adfeeError },
+  ] = useMutation(ADD_FEE_MUTATION, {
+    variables: {
+      input: {
+        shipping: {
+          country: input.country,
+          state: input.state,
+          city: input.city,
+        },
+        clientMutationId: v4(),
+      },
+    },
+    onCompleted: () => {
+      refetch();
+    },
+    onError: (error) => {
+      if (error) {
+        setError(error?.graphQLErrors?.[0]?.message);
+      }
+    },
+  });
+
+  // Add Fee Mutation
+  const [
+    updateShippingMethod,
+    {
+      data: shipingMethodResponse,
+      loading: shipingMethodLoading,
+      error: shipingMethodError,
+    },
+  ] = useMutation(UPDATE_SHIPPING_METHOD_MUTATION, {
+    variables: {
+      input: {
+        clientMutationId: v4(),
+        shippingMethods: [input.shippingMethod],
+      },
+    },
+    onCompleted: () => {
+      refetch();
+    },
+    onError: (error) => {
+      if (error) {
+        setError(error?.graphQLErrors?.[0]?.message);
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (checkoutResponse) {
+      // const queryString = checkoutResponse.checkout.redirect.split('?');
+      // const queryObject = JSON.parse(
+      //   '{"' + queryString[1].replace(/&/g, '","').replace(/=/g, '":"') + '"}',
+      //   function (key, value) {
+      //     return key === '' ? value : decodeURIComponent(value);
+      //   }
+      // );
+      // router.push(
+      //   `/checkoutSuccess?key=${queryObject.key}&snap_token=${queryObject.snap_token}`
+      // );
+      window.location.href = checkoutResponse.checkout.redirect;
+    }
+  }, [checkoutResponse]);
 
   /*
    * Handle form submit.
@@ -101,9 +176,10 @@ const CheckoutForm = () => {
       setInput({ ...input, errors: result.errors });
       return;
     }
-    const checkOutData = createCheckoutData(input);
-    setOrderData(checkOutData);
+    // const checkOutData = createCheckoutData(input);
+    // setOrderData(checkOutData);
     setError(null);
+    checkout();
   };
 
   /*
@@ -123,51 +199,83 @@ const CheckoutForm = () => {
     }
   };
 
-  useEffect(() => {
-    if (null !== orderData) {
-      // Call the checkout mutation when the value for orderData changes/updates.
-      checkout();
-    }
-  }, [orderData]);
+  // useEffect(() => {
+  //   addfee();
+  // }, []);
 
   return (
     <>
-      {cart ? (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+        {/*Billing Details*/}
         <form onSubmit={handleFormSubmit} className="woo-next-checkout-form">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-            {/*Billing Details*/}
-            <div className="billing-details">
-              <h2 className="text-xl font-medium mb-4">Billing Details</h2>
-              <Billing input={input} handleOnChange={handleOnChange} />
-            </div>
-            {/* Order & Payments*/}
-            <div className="your-orders">
-              {/*	Order*/}
-              <h2 className="text-xl font-medium mb-4">Your Order</h2>
-              <YourOrder cart={cart} />
-
-              {/*Payment*/}
-              <PaymentModes input={input} handleOnChange={handleOnChange} />
-              <div className="woo-next-place-order-btn-wrap mt-5">
-                <button
-                  className="bg-purple-600 text-white px-5 py-3 rounded-sm w-auto xl:w-full"
-                  type="submit"
-                >
-                  Place Order
-                </button>
-              </div>
-
-              {/* Checkout Loading*/}
-              {checkoutLoading && <p>Processing Order...</p>}
-            </div>
+          <div className="billing-details">
+            <Billing input={input} handleOnChange={handleOnChange} />
           </div>
         </form>
-      ) : (
-        ''
-      )}
+        {/* Order & Payments*/}
+        <div className="your-orders">
+          <div className="flex mb-4 items-center">
+            <h2 className="text-xl font-medium mr-4">Pengiriman</h2>
+            <button
+              onClick={() => {
+                addfee();
+              }}
+              className="px-8 py-2 bg-primary text-white cursor-pointer hover:bg-yellow-500 rounded"
+            >
+              {loading || shipingMethodLoading || adfeeLoading ? (
+                <Loader size={16} />
+              ) : (
+                'Estimasi Pengiriman'
+              )}
+            </button>
+          </div>
+          <div className="mb-4">
+            {cart?.shippingMethods?.length
+              ? cart.shippingMethods.map((item, index) => (
+                  <div key={item.id}>
+                    <label
+                      className="form-check-label"
+                      onClick={() =>
+                        setTimeout(function () {
+                          updateShippingMethod();
+                        }, 3000)
+                      }
+                    >
+                      <input
+                        onChange={handleOnChange}
+                        value={item.id}
+                        className="form-check-input mr-3"
+                        name="shippingMethod"
+                        type="radio"
+                        defaultChecked={index === 0}
+                      />
+                      <span className="woo-next-payment-content">
+                        {item.label} (Rp. {item.cost})
+                      </span>
+                    </label>
+                  </div>
+                ))
+              : 'Tidak ada pengiriman tersedia. Silahkan cek kembali alamat anda.'}
+          </div>
+          {/*	Order*/}
+          <h2 className="text-xl font-medium mb-4">Pesananmu</h2>
+          <YourOrder cart={cart} />
+          {/*Payment*/}
+          {/* <PaymentModes input={input} handleOnChange={handleOnChange} /> */}
+          <div className="woo-next-place-order-btn-wrap mt-5">
+            <button
+              className="bg-primary hover:bg-yellow-500 text-white py-3 rounded w-auto xl:w-full text-center flex justify-center items-center"
+              onClick={handleFormSubmit}
+            >
+              {checkoutLoading ? <Loader size={16} /> : 'Place Order'}
+            </button>
+            <div className="text-xs mt-4 text-red-500">{errorCheckout}</div>
+          </div>
+        </div>
+      </div>
 
       {/*	Show message if Order Sucess*/}
-      <OrderSuccess response={checkoutResponse} />
+      {/* <OrderSuccess response={checkoutResponse} /> */}
     </>
   );
 };
