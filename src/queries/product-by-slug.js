@@ -8,6 +8,7 @@ export const PRODUCT_BY_SLUG_QUERY = gql`
       averageRating
       slug
       description
+      date
       shortDescription
       productCategories {
         nodes {
@@ -57,6 +58,27 @@ export const PRODUCT_BY_SLUG_QUERY = gql`
           }
         }
         id
+      }
+      seo {
+        canonical
+        metaDesc
+        metaKeywords
+        metaRobotsNofollow
+        metaRobotsNoindex
+        opengraphAuthor
+        opengraphDescription
+        opengraphImage {
+          altText
+          sourceUrl
+          title
+          caption
+        }
+        opengraphTitle
+        opengraphUrl
+        opengraphType
+        title
+        twitterDescription
+        twitterTitle
       }
     }
   }

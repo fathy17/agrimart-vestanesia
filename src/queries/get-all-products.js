@@ -3,11 +3,10 @@ import { gql } from '@apollo/client';
 /**
  * GraphQL categories and products query.
  */
-const GET_ONSALE_QUERY = gql`
-  query {
-    products(where: { onSale: true }, first: 4) {
+const ALL_PRODUCTS_QUERY = gql`
+  query ALL_PRODUCTS_QUERY($sort: ProductsOrderByEnum!) {
+    products(first: 9999, where: { orderby: { field: $sort } }) {
       nodes {
-        id
         id
         averageRating
         slug
@@ -18,6 +17,11 @@ const GET_ONSALE_QUERY = gql`
           title
           srcSet
           sourceUrl
+        }
+        productCategories {
+          nodes {
+            name
+          }
         }
         name
         ... on SimpleProduct {
@@ -53,4 +57,4 @@ const GET_ONSALE_QUERY = gql`
   }
 `;
 
-export default GET_ONSALE_QUERY;
+export default ALL_PRODUCTS_QUERY;

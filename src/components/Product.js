@@ -9,21 +9,26 @@ const Product = (props) => {
 
   return (
     // @TODO Need to handle Group products differently.
-    undefined !== product && 'GroupProduct' !== product.__typename ? (
-      <div className="product border rounded">
-        <Link href={`/product/${product.slug}`}>
+    undefined !== product ? (
+      <div className="product border rounded-md">
+        <Link href={`/produk/${product.slug}`}>
           <a>
             {!isEmpty(product.image) ? (
-              <img src={product.image.sourceUrl} alt="Product image" />
+              <img
+                className="rounded-t-md"
+                src={product.image.sourceUrl}
+                alt="Product image"
+              />
             ) : !isEmpty(clientConfig.productImagePlaceholder) ? (
               <img
+                className="rounded-t-md"
                 src={clientConfig.productImagePlaceholder}
                 alt="Placeholder product image"
               />
             ) : null}
           </a>
         </Link>
-        <div className="product-info p-4 flex justify-between items-center bg-white">
+        <div className="product-info p-4 flex justify-between items-center bg-white rounded-b-md">
           <div>
             <h3 className="product-title font-medium text-gray-800">
               {product.name ? product.name : ''}

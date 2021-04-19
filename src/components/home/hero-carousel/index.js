@@ -50,7 +50,7 @@ const HeroCarousel = ({ heroCarousel }) => {
 
   return (
     <div className="banner flex flex-col sm:flex-row justify-between overflow-hidden mt-20 lg:mx-56">
-      <div className="banner-img w-full">
+      <div className="banner-img w-full h-60">
         {heroCarousel.map((item, index) => {
           const opacity =
             activeIndex === index || 1 === heroCarousel.length
@@ -65,7 +65,7 @@ const HeroCarousel = ({ heroCarousel }) => {
                 src={item?.image?.sourceUrl}
                 srcSet={item?.image?.srcSet}
                 loading="lazy"
-                className="object-contain lg:object-cover"
+                className="object-contain lg:object-cover h-60"
               />
             </div>
           );

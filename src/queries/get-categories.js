@@ -9,6 +9,7 @@ const GET_CATEGORIES_QUERY = gql`
       nodes {
         id
         name
+        count
         slug
         parentId
         image {
@@ -19,6 +20,8 @@ const GET_CATEGORIES_QUERY = gql`
           nodes {
             id
             name
+            count
+            slug
           }
         }
       }

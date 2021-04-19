@@ -16,6 +16,7 @@
     "graphql": "^15.4.0",
     "lodash": "^4.17.20",
     "next": "10.0.1",
+    "next-seo": "^4.24.0",
     "node-fetch": "^2.6.1",
     "nprogress": "^0.2.0",
     "rajaongkir-nodejs": "^0.2.0",

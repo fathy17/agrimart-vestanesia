@@ -1,17 +1,21 @@
 import { gql } from '@apollo/client';
 
 export const PRODUCT_BY_CATEGORY_SLUG = gql`
-  query PRODUCT_BY_CATEGORY_SLUG($slug: ID!) {
+  query PRODUCT_BY_CATEGORY_SLUG($slug: ID!, $sort: ProductsOrderByEnum!) {
     productCategory(id: $slug, idType: SLUG) {
       id
       name
-      products(first: 50) {
+      products(where: { orderby: { field: $sort } }) {
         nodes {
-          id
           id
           averageRating
           slug
           description
+          productCategories {
+            nodes {
+              name
+            }
+          }
           image {
             id
             uri
@@ -49,6 +53,27 @@ export const PRODUCT_BY_CATEGORY_SLUG = gql`
             id
           }
         }
+      }
+      seo {
+        canonical
+        metaDesc
+        metaKeywords
+        metaRobotsNofollow
+        metaRobotsNoindex
+        opengraphAuthor
+        opengraphDescription
+        opengraphImage {
+          altText
+          sourceUrl
+          title
+          caption
+        }
+        opengraphTitle
+        opengraphUrl
+        opengraphType
+        title
+        twitterDescription
+        twitterTitle
       }
     }
   }

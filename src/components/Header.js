@@ -12,10 +12,10 @@ const Header = () => {
     <div>
       <div
         ref={element}
-        className="py-2 px-4 flex items-center border-b-2 border-dashed border-gray-700"
+        className="py-2 px-4 md:flex items-center border-b-2 border-dashed border-gray-700"
       >
         <small>24/7 Customer Service: +6281 1422 0206</small>
-        <ul className="social-links flex align-center text-primary mx-28">
+        <ul className="social-links flex align-center text-primary md:mx-28 md:my-0 my-4">
           <li>
             <a
               href="https://www.facebook.com/codeytek"

@@ -20,18 +20,20 @@ const CheckoutForm = () => {
   // const initialState = {
   //   firstName: '',
   //   lastName: '',
-  //   country: 'ID',
   //   address1: '',
   //   address2: '',
   //   city: '',
   //   state: '',
+  //   country: 'ID',
   //   postcode: '',
   //   phone: '',
   //   email: '',
   //   createAccount: false,
   //   orderNotes: '',
-  //   paymentMethod: '',
+  //   paymentMethod: 'midtrans',
   //   errors: null,
+  //   shippingMethod: null,
+  //   customerNote: '',
   // };
 
   // Use this for testing purposes, so you dont have to fill the checkout form over an over again.
@@ -205,7 +207,7 @@ const CheckoutForm = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+      <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-20 gap-10">
         {/*Billing Details*/}
         <form onSubmit={handleFormSubmit} className="woo-next-checkout-form">
           <div className="billing-details">
@@ -262,9 +264,9 @@ const CheckoutForm = () => {
           <YourOrder cart={cart} />
           {/*Payment*/}
           {/* <PaymentModes input={input} handleOnChange={handleOnChange} /> */}
-          <div className="woo-next-place-order-btn-wrap mt-5">
+          <div className="woo-next-place-order-btn-wrap mt-5 w-full">
             <button
-              className="bg-primary hover:bg-yellow-500 text-white py-3 rounded w-auto xl:w-full text-center flex justify-center items-center"
+              className="bg-primary hover:bg-yellow-500 text-white py-3 rounded w-full text-center flex justify-center items-center"
               onClick={handleFormSubmit}
             >
               {checkoutLoading ? <Loader size={16} /> : 'Place Order'}

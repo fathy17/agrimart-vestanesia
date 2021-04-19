@@ -61,29 +61,29 @@ const Nav = ({ sticky }) => {
                   Beranda
                 </a>
               </Link>
-              <Link href="/">
+              <Link href="/kategori/semua-produk?sort=DATE">
                 <a className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10">
                   Produk
                 </a>
               </Link>
-              <Link href="/">
+              <Link href="/jadi-member">
                 <a className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10">
                   Jadi Member
                 </a>
               </Link>
-              <Link href="/">
+              <Link href="/konsultasi">
                 <a className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10">
                   Konsultasi
                 </a>
               </Link>
-              <Link href="/">
+              <Link href="/wishlist">
                 <a className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10">
                   Wishlist
                 </a>
               </Link>
             </div>
 
-            <div className="text-sm font-medium flex items-center">
+            <div className="text-sm font-medium flex items-center md:mt-0 mt-4">
               <div className="border rounded p-2 mr-4 hover:bg-gray-100 cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -3,7 +3,7 @@ import CheckoutForm from '../src/components/checkout/CheckoutForm';
 
 const Checkout = () => (
   <Layout>
-    <div className="checkout container mx-auto my-32 px-56">
+    <div className="checkout container mx-auto my-20 lg:my-32 lg:px-56 px-4">
       <h1 className="mb-5 text-4xl uppercase text-primary font-bold">
         Checkout Page
       </h1>
