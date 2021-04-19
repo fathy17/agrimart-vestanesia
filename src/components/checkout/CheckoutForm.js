@@ -17,36 +17,17 @@ import UPDATE_SHIPPING_METHOD_MUTATION from '../../mutations/update-shipping-met
 import { useRouter } from 'next/router';
 
 const CheckoutForm = () => {
-  // const initialState = {
-  //   firstName: '',
-  //   lastName: '',
-  //   address1: '',
-  //   address2: '',
-  //   city: '',
-  //   state: '',
-  //   country: 'ID',
-  //   postcode: '',
-  //   phone: '',
-  //   email: '',
-  //   createAccount: false,
-  //   orderNotes: '',
-  //   paymentMethod: 'midtrans',
-  //   errors: null,
-  //   shippingMethod: null,
-  //   customerNote: '',
-  // };
-
-  // Use this for testing purposes, so you dont have to fill the checkout form over an over again.
   const initialState = {
-    firstName: 'Fathy',
-    lastName: 'Sayed',
-    address1: '109 Hills Road Valley',
-    city: 'Pune',
-    state: 'Maharastra',
+    firstName: '',
+    lastName: '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
     country: 'ID',
-    postcode: '400298',
-    phone: '9959338989',
-    email: 'andifathyahmadfahrezy@gmail.com',
+    postcode: '',
+    phone: '',
+    email: '',
     createAccount: false,
     orderNotes: '',
     paymentMethod: 'midtrans',
@@ -54,6 +35,25 @@ const CheckoutForm = () => {
     shippingMethod: null,
     customerNote: '',
   };
+
+  // Use this for testing purposes, so you dont have to fill the checkout form over an over again.
+  // const initialState = {
+  //   firstName: 'Fathy',
+  //   lastName: 'Sayed',
+  //   address1: '109 Hills Road Valley',
+  //   city: 'Pune',
+  //   state: 'Maharastra',
+  //   country: 'ID',
+  //   postcode: '400298',
+  //   phone: '9959338989',
+  //   email: 'andifathyahmadfahrezy@gmail.com',
+  //   createAccount: false,
+  //   orderNotes: '',
+  //   paymentMethod: 'midtrans',
+  //   errors: null,
+  //   shippingMethod: null,
+  //   customerNote: '',
+  // };
 
   const [cart, setCart] = useContext(AppContext);
   const [_, setError] = useContext(ErrorContext);

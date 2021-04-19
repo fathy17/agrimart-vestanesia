@@ -12,6 +12,11 @@ const GET_ONSALE_QUERY = gql`
         averageRating
         slug
         description
+        productCategories {
+          nodes {
+            name
+          }
+        }
         image {
           id
           uri

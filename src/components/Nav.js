@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import CartIcon from './cart/CartIcon';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Modal from './Modal';
 import CartItemsContainer from './cart/cart-page/CartItemsContainer';
+import { AppContext } from './context/AppContext';
 
 const Nav = ({ sticky }) => {
   const [isMenuVisible, setMenuVisibility] = useState(false);
   const [modal, setModal] = useState(false);
+  const [cart] = useContext(AppContext);
   return (
     <>
       <nav
@@ -115,13 +117,15 @@ const Nav = ({ sticky }) => {
         title="Keranjang Anda"
         content={<CartItemsContainer />}
         footer={
-          <Link href="/checkout">
-            <a>
-              <button className="px-8 py-2 w-full font-semibold bg-primary text-white rounded hover:bg-yellow-500">
-                Checkout
-              </button>
-            </a>
-          </Link>
+          cart ? (
+            <Link href="/checkout">
+              <a>
+                <button className="px-8 py-2 w-full font-semibold bg-primary text-white rounded hover:bg-yellow-500">
+                  Checkout
+                </button>
+              </a>
+            </Link>
+          ) : null
         }
         onClose={() => setModal(false)}
       />

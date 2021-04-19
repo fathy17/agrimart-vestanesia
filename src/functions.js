@@ -246,7 +246,7 @@ export const getFormattedCart = (data) => {
 
   formattedCart.shippingTotal = data.cart.shippingTotal;
   formattedCart.shippingMethods =
-    data.cart.availableShippingMethods[0].rates || [];
+    data.cart?.availableShippingMethods?.[0]?.rates || [];
   formattedCart.totalProductsCount = totalProductsCount;
   formattedCart.subTotal = data.cart.subtotal;
   formattedCart.totalProductsPrice = data.cart.total;
