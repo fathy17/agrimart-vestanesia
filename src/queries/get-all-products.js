@@ -1,14 +1,12 @@
 import { gql } from '@apollo/client';
 
-/**
- * GraphQL categories and products query.
- */
 const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($sort: ProductsOrderByEnum!) {
     products(first: 9999, where: { orderby: { field: $sort } }) {
       nodes {
         id
         averageRating
+        onSale
         slug
         description
         image {

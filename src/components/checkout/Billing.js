@@ -24,7 +24,7 @@ const Billing = ({ input, handleOnChange }) => {
         <div className="">
           <div className="form-group mb-3">
             <label className="text-xs" htmlFor="first-name">
-              First Name
+              Nama depan
               <abbr className="required" title="required">
                 *
               </abbr>
@@ -44,7 +44,7 @@ const Billing = ({ input, handleOnChange }) => {
         <div className="">
           <div className="form-group mb-3">
             <label className="text-xs" htmlFor="last-name">
-              Last Name
+              Nama Belakang
               <abbr className="required" title="required">
                 *
               </abbr>
@@ -65,7 +65,7 @@ const Billing = ({ input, handleOnChange }) => {
       {/* Street Address */}
       <div className="form-group mb-3">
         <label className="text-xs" htmlFor="street-address">
-          Street Address
+          Alamat
           <abbr className="required" title="required">
             *
           </abbr>
@@ -95,7 +95,7 @@ const Billing = ({ input, handleOnChange }) => {
       {/* Country */}
       <div className="form-group mb-3">
         <label className="text-xs" htmlFor="country-select">
-          Country
+          Negara
           <abbr className="required" title="required">
             *
           </abbr>
@@ -107,7 +107,7 @@ const Billing = ({ input, handleOnChange }) => {
           className="form-control woo-next-checkout-input p-1 w-full border-solid border border-gray-500 rounded"
           id="country-select"
         >
-          <option value="">Select a country...</option>
+          <option value="">Pilih Negara</option>
           {countryList.length &&
             countryList.map((country, index) => (
               <option key={`${country}-${index}`} value={country.countryCode}>
@@ -120,7 +120,7 @@ const Billing = ({ input, handleOnChange }) => {
       {/* County */}
       <div className="form-group mb-3">
         <label className="text-xs" htmlFor="state">
-          State/County
+          Provinsi
           <abbr className="required" title="required">
             *
           </abbr>
@@ -137,7 +137,7 @@ const Billing = ({ input, handleOnChange }) => {
           className="form-control woo-next-checkout-input p-1 w-full border-solid border border-gray-500 rounded"
           id="state"
         >
-          <option value="">Select a province...</option>
+          <option value="">Pilih Provinsi...</option>
           {provinceList.length &&
             provinceList.map((prov) => (
               <option key={prov.id} value={prov.value}>
@@ -150,7 +150,7 @@ const Billing = ({ input, handleOnChange }) => {
       {/* Town/City */}
       <div className="form-group mb-3">
         <label className="text-xs" htmlFor="city">
-          Town/City
+          Kota
           <abbr className="required" title="required">
             *
           </abbr>
@@ -164,7 +164,7 @@ const Billing = ({ input, handleOnChange }) => {
           className="form-control woo-next-checkout-input p-1 w-full border-solid border border-gray-500 rounded"
           id="city"
         >
-          <option value="">Select a city...</option>
+          <option value="">Pilih Kota...</option>
           {cityList.length &&
             cityList.map((item) => (
               <option key={item.id} value={item.value}>
@@ -177,7 +177,7 @@ const Billing = ({ input, handleOnChange }) => {
       {/* Post Code */}
       <div className="form-group mb-3">
         <label className="text-xs" htmlFor="post-code">
-          Postcode
+          Kode pos
           <abbr className="required" title="required">
             *
           </abbr>
@@ -198,7 +198,7 @@ const Billing = ({ input, handleOnChange }) => {
         <div className="col-lg-6 col-md-12 p-0">
           <div className="form-group mb-3">
             <label className="text-xs" htmlFor="phone">
-              Phone
+              No. Telpon
               <abbr className="required" title="required">
                 *
               </abbr>

@@ -7,6 +7,7 @@ const CHECKOUT_MUTATION = gql`
       order {
         id
         databaseId
+        paymentMethod
         total
         transactionId
         orderKey

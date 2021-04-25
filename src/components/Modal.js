@@ -23,7 +23,7 @@ const Modal = ({ isVisible = false, title, content, footer, onClose }) => {
       >
         <div className="modal-header flex  justify-between items-center py-2 px-4 border-b-4 border-primary">
           <span
-            className="modal-close text-2xl font-semibold"
+            className="modal-close text-2xl font-semibold cursor-pointer"
             onClick={onClose}
           >
             &times;

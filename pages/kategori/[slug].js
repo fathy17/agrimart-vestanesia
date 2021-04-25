@@ -3,9 +3,9 @@ import client from '../../src/components/ApolloClient';
 import Product from '../../src/components/Product';
 import {
   PRODUCT_BY_CATEGORY_SLUG,
-  PRODUCT_CATEGORIES_SLUGS,
+  // PRODUCT_CATEGORIES_SLUGS,
 } from '../../src/queries/product-by-category';
-import { isEmpty } from 'lodash';
+// import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
 import GET_CATEGORIES_QUERY from '../../src/queries/get-categories';
 import ALL_PRODUCTS_QUERY from '../../src/queries/get-all-products';
@@ -23,7 +23,6 @@ export default function CategorySingle(props) {
 
   const { products, categories, seo } = props;
 
-  //   console.log(products);
   return (
     <>
       {router.query.slug !== 'semua-produk' ? (
@@ -64,7 +63,13 @@ export default function CategorySingle(props) {
                     >
                       <Link href={`/kategori/${item.slug}?sort=DATE`}>
                         <a>
-                          <p className="font-semibold cursor-pointer hover:text-primary">
+                          <p
+                            className={`font-semibold cursor-pointer hover:text-primary ${
+                              router.query.slug === item.slug
+                                ? 'text-primary'
+                                : ''
+                            }`}
+                          >
                             {item.name}
                           </p>
                         </a>
@@ -81,7 +86,13 @@ export default function CategorySingle(props) {
                         >
                           <Link href={`/kategori/${child.slug}?sort=DATE`}>
                             <a>
-                              <p className="cursor-pointer hover:text-primary">
+                              <p
+                                className={`cursor-pointer hover:text-primary ${
+                                  router.query.slug === child.slug
+                                    ? 'text-primary'
+                                    : ''
+                                }`}
+                              >
                                 {child.name}
                               </p>
                             </a>
@@ -133,8 +144,6 @@ export async function getServerSideProps(context) {
     params: { slug },
     query: { sort },
   } = context;
-
-  console.log(context);
 
   const slugCond = slug !== 'semua-produk';
 

@@ -52,7 +52,7 @@ const YourOrder = ({ cart }) => {
                   {cart.shippingTotal}
                 </td>
               </tr>
-              {/*Pengiriman*/}
+              {/*Total*/}
               <tr className="bg-gray-200">
                 <td className="py-2" />
                 <td className="woo-next-checkout-total font-normal text-xl py-2">
@@ -63,11 +63,6 @@ const YourOrder = ({ cart }) => {
                   {cart.totalProductsPrice}
                 </td>
               </tr>
-              {/* <tr className="">
-							<td className=""/>
-							<td className="woo-next-checkout-total">Total</td>
-							<td className="woo-next-checkout-total">{ cart.totalProductsPrice }</td>
-						</tr> */}
             </tbody>
           </table>
         </Fragment>

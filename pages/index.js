@@ -11,16 +11,7 @@ import { NextSeo } from 'next-seo';
 import GET_SEO from '../src/queries/get-seo';
 
 export default function Home(props) {
-  const {
-    products,
-    productCategories,
-    heroCarousel,
-    topSell,
-    onSale,
-    seo,
-  } = props;
-
-  console.log(seo);
+  const { heroCarousel, onSale, seo } = props;
 
   return (
     <>
@@ -59,7 +50,7 @@ export default function Home(props) {
           {/*Hero Carousel*/}
           <HeroCarousel heroCarousel={heroCarousel} />
           {/* Feature */}
-          <div className="products container mx-auto my-16 p-4 lg:px-56 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8 sm:gap-4 gap-4">
+          <div className="products container mx-auto my-12 md:my-16 p-4 xl:px-56 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8 sm:gap-4 gap-4">
             <div className="flex flex-col items-center text-center">
               <div className="text-primary w-12 h-12 flex justify-center items-center rounded-full p-2 border-primary border-2">
                 <svg
@@ -165,10 +156,10 @@ export default function Home(props) {
             </div>
           </div>
           {/*Products*/}
-          <div className="products w-full mx-auto my-24 p-4 lg:px-40 xl:px-56 bg-gray-100 ">
+          <div className="products w-full mx-auto my-24 p-4  xl:px-56 bg-gray-100 ">
             <div className="flex items-center">
               <hr className="w-full my-6 border-t-2 border-black" />
-              <h2 className="px-4 whitespace-nowrap text-lg uppercase">
+              <h2 className="px-4 whitespace-nowrap text-lg uppercase font-semibold">
                 Produk Pilihan
               </h2>
               <hr className="w-full my-6 border-t-2 border-black" />
@@ -237,7 +228,7 @@ export default function Home(props) {
                 <h4 className="text-base md:text-xl mt-4 md:mt-16 mb-4">
                   kunjungi
                 </h4>
-                <a href="https://vestanesia.com/">
+                <a href="https://vestanesia.com/" target="_blank">
                   <div className="bg-primary  py-4 px-8 rounded-full cursor-pointer">
                     <h1 className="text-xl md:text-4xl font-semibold">
                       https://vestanesia.com/
@@ -265,10 +256,6 @@ export async function getStaticProps() {
     query: PRODUCTS_AND_CATEGORIES_QUERY,
   });
 
-  const topsell = await client.query({
-    query: GET_TOPSELL_QUERY,
-  });
-
   const onSale = await client.query({
     query: GET_ONSALE_QUERY,
   });
@@ -280,13 +267,7 @@ export async function getStaticProps() {
   return {
     props: {
       seo: seo?.data?.seo || {},
-      productCategories:
-        data?.productCategories?.nodes
-          .filter((item) => item.parentId !== 'dGVybTozMA==')
-          .slice(0, 3) || [],
-      products: data?.products?.nodes || [],
       heroCarousel: data?.heroCarousel?.nodes[0]?.children?.nodes || [],
-      topSell: topsell?.data?.products?.nodes || [],
       onSale: onSale?.data?.products?.nodes || [],
     },
     revalidate: 1,

@@ -62,6 +62,7 @@ const AddToCart = (props) => {
   // Get Cart Data.
   const { loading, error, data, refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'no-cache',
     onCompleted: () => {
       // console.warn( 'completed GET_CART' );
 

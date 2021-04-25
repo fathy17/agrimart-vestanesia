@@ -7,8 +7,6 @@ const OrderSuccess = (props) => {
 
   const responseData = response.checkout;
 
-  console.log(response);
-
   return (
     <div className="container">
       {'success' === responseData.result ? (

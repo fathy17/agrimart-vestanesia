@@ -9,9 +9,12 @@ export default function SnackBar() {
       window.localStorage.removeItem('woo-session');
       window.localStorage.removeItem('woo-next-cart');
     }
-    setInterval(function () {
+    const timer = setTimeout(function () {
       setError(null);
     }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (

@@ -24,68 +24,6 @@ const PRODUCTS_AND_CATEGORIES_QUERY = gql`
         }
       }
     }
-    productCategories {
-      nodes {
-        id
-        name
-        slug
-        parentId
-        image {
-          id
-          sourceUrl
-          srcSet
-        }
-      }
-    }
-    products(where: { type: SIMPLE }, first: 4) {
-      nodes {
-        id
-        averageRating
-        slug
-        description
-        image {
-          id
-          uri
-          title
-          srcSet
-          sourceUrl
-        }
-        productCategories {
-          nodes {
-            name
-          }
-        }
-        name
-        ... on SimpleProduct {
-          price
-          regularPrice
-          id
-        }
-        ... on VariableProduct {
-          price
-          id
-          regularPrice
-        }
-        ... on ExternalProduct {
-          price
-          id
-          externalUrl
-          regularPrice
-        }
-        ... on GroupProduct {
-          id
-          products {
-            nodes {
-              ... on SimpleProduct {
-                id
-                price
-                regularPrice
-              }
-            }
-          }
-        }
-      }
-    }
   }
 `;
 

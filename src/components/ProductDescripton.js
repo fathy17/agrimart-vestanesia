@@ -56,7 +56,7 @@ export default function ProductDescripton({ product }) {
       <div className="flex">
         {menu.map((item) => (
           <p
-            className={`mr-8 cursor-pointer hover:text-primary  ${
+            className={`mr-4 md:mr-8 cursor-pointer hover:text-primary  ${
               active === item
                 ? 'border-b-2 border-primary text-primary font-semibold'
                 : ''

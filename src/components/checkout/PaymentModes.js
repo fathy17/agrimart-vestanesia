@@ -13,22 +13,10 @@ const PaymentModes = ({ input, handleOnChange }) => {
             className="form-check-input mr-3"
             name="paymentMethod"
             type="radio"
-            defaultChecked
           />
-          <span className="woo-next-payment-content">Direct Bank Transfer</span>
-        </label>
-      </div>
-      {/*Pay with COD*/}
-      <div className="form-check woo-next-payment-input-container mt-2">
-        <label className="form-check-label">
-          <input
-            onChange={handleOnChange}
-            value="cod"
-            className="form-check-input mr-3"
-            name="paymentMethod"
-            type="radio"
-          />
-          <span className="woo-next-payment-content">Cash on Delivery</span>
+          <span className="woo-next-payment-content">
+            Transfer dengan bank BNI
+          </span>
         </label>
       </div>
       {/*Pay with Midtrans*/}
@@ -41,7 +29,9 @@ const PaymentModes = ({ input, handleOnChange }) => {
             name="paymentMethod"
             type="radio"
           />
-          <span className="woo-next-payment-content">Midtrans</span>
+          <span className="woo-next-payment-content">
+            Bayar dengan virtual account
+          </span>
         </label>
       </div>
       {/*	Payment Instructions*/}

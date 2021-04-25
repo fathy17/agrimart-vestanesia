@@ -10,6 +10,7 @@ export const PRODUCT_BY_CATEGORY_SLUG = gql`
           id
           averageRating
           slug
+          onSale
           description
           productCategories {
             nodes {

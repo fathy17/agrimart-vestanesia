@@ -12,13 +12,15 @@ const Header = () => {
     <div>
       <div
         ref={element}
-        className="py-2 px-4 md:flex items-center border-b-2 border-dashed border-gray-700"
+        className="py-2 px-8 flex items-center border-b-2 border-dashed border-gray-700"
       >
-        <small>24/7 Customer Service: +6281 1422 0206</small>
-        <ul className="social-links flex align-center text-primary md:mx-28 md:my-0 my-4">
+        <small className="text-xs lg:text-base">
+          24/7 Customer Service: +6281 1422 0206
+        </small>
+        <ul className="social-links flex align-center text-primary ml-4 md:ml-28 md:my-0 my-2">
           <li>
             <a
-              href="https://www.facebook.com/codeytek"
+              href="https://www.facebook.com/Vestanesia-Agrimart-109438211286242"
               className="fa fa-facebook text-primary"
               target="_blank"
             >
@@ -26,13 +28,13 @@ const Header = () => {
             </a>
           </li>
           <li className="ml-2 mt-1">
-            <a href="https://twitter.com/codeytek" target="_blank">
+            <a href="https://twitter.com/vestanesia" target="_blank">
               <Twitter />
             </a>
           </li>
           <li className="ml-2 mt-1">
             <a
-              href="https://youtube.com/ImranSayedDev"
+              href="https://www.youtube.com/channel/UCpr94eeHBmez6QMbn4tMYwA"
               className="fa fa-youtube"
               target="_blank"
             >
@@ -41,7 +43,7 @@ const Header = () => {
           </li>
           <li className="ml-2">
             <a
-              href="https://www.instagram.com/codeytek_academy/"
+              href="https://www.instagram.com/vestanesiaagrimart/"
               className="fa fa-instagram"
               target="_blank"
             >
@@ -49,7 +51,6 @@ const Header = () => {
             </a>
           </li>
         </ul>
-        <small>Indonesia (id)</small>
       </div>
       <Nav sticky={isSticky} />
       {error && <SnackBar />}

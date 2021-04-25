@@ -10,7 +10,7 @@ const CartIcon = () => {
     null !== cart && Object.keys(cart).length ? cart.totalProductsPrice : '';
 
   return (
-    <div className="block lg:inline-block text-black hover:text-black mr-10">
+    <div className="block lg:inline-block text-black hover:text-black ">
       <div className="bg-primary py-2 px-4 rounded flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"

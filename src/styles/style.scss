@@ -22,13 +22,14 @@
 
 body {
   background-color: #ffffff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .product {
   img {
     width: 100%;
     height: 15rem;
-    object-fit: cover;
+    object-fit: contain;
   }
 }
 
@@ -40,7 +41,14 @@ body {
   img {
     width: 100%;
     object-position: 50% 50%;
+    object-fit: cover;
+    height: 15rem;
   }
+}
+
+.banner-img {
+  position: relative;
+  height: 15rem;
 }
 
 .banner-img-container {
@@ -65,8 +73,18 @@ body {
   }
 }
 
-.banner-img {
+.banner-img-gallery {
   position: relative;
+  height: 20rem;
+}
+
+.banner-gallery {
+  img {
+    width: 100%;
+    object-position: 50% 50%;
+    height: 20rem;
+    object-fit: cover;
+  }
 }
 
 .slider-button {
@@ -217,7 +235,7 @@ body {
   }
 }
 
-@media (min-width: 1028px) {
+@media (min-width: 768px) {
   .banner-img {
     position: relative;
     height: 36rem !important;
@@ -230,4 +248,30 @@ body {
       object-position: 50% 50%;
     }
   }
+
+  .banner-img-gallery {
+    position: relative;
+    height: 30rem;
+  }
+
+  .banner-gallery {
+    img {
+      width: 100%;
+      object-position: 50% 50%;
+      height: 30rem;
+      object-fit: cover;
+    }
+  }
+}
+
+.badge-right {
+  position: absolute;
+  top: -0.2rem;
+  right: -0.1rem;
+}
+
+.badge-left {
+  position: absolute;
+  top: -0.2rem;
+  left: -0.3rem;
 }

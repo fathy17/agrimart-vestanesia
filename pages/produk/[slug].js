@@ -79,14 +79,18 @@ export default function Product(props) {
               <div className="product-images">
                 {!isEmpty(product?.galleryImages?.nodes) ? (
                   <>
-                    <GalleryCarousel gallery={product?.galleryImages?.nodes} />
+                    <GalleryCarousel
+                      gallery={[
+                        product?.image,
+                        ...product?.galleryImages?.nodes,
+                      ]}
+                    />
                   </>
                 ) : !isEmpty(product.image) ? (
                   <img
                     src={product?.image?.sourceUrl}
                     alt="Product Image"
                     width="100%"
-                    height="auto"
                     srcSet={product?.image?.srcSet}
                   />
                 ) : null}
@@ -108,7 +112,9 @@ export default function Product(props) {
             /> */}
                 <div className="mb-4">
                   <div className="text-primary line-through">
-                    {product?.regularPrice}
+                    {product?.regularPrice !== product?.price
+                      ? product?.regularPrice
+                      : ''}
                   </div>
                   <div className="text-4xl text-primary font-bold">
                     {product?.price}

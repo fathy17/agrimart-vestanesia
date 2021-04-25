@@ -9,7 +9,6 @@ const GalleryCarousel = ({ gallery }) => {
   const activeIndexRef = useRef({ activeIndex: 0 });
   const slideRef = useRef(0);
   const [slide, setSlide] = useState(0);
-  const [restartSlide, setRestartSlide] = useState(0);
   const { activeIndex } = activeIndexRef.current;
 
   /**
@@ -27,17 +26,37 @@ const GalleryCarousel = ({ gallery }) => {
      */
     if (slide === gallery.length - 1) {
       setSlide(0);
-      setRestartSlide(restartSlide + 1);
     } else {
       // If its not the last slide increment active index by one.
       setSlide(slide + 1);
     }
   };
 
+  /**
+   * Change to prev slide.
+   */
+  const prevSlide = () => {
+    if (1 === gallery.length) {
+      return null;
+    }
+
+    /**
+     * If if autoplay is set to true
+     * and all slides are finished playing,
+     * set the activeIndex to one and restart the slide from start.
+     */
+    if (slide === 0) {
+      setSlide(gallery.length - 1);
+    } else {
+      // If its not the last slide increment active index by one.
+      setSlide(slide - 1);
+    }
+  };
+
   return (
     <>
-      <div className="banner flex flex-col sm:flex-row justify-between overflow-hidden md:mr-4">
-        <div className="banner-img w-full">
+      <div className="banner-gallery flex flex-col sm:flex-row justify-between overflow-hidden md:mr-4">
+        <div className="banner-img-gallery w-full">
           {gallery.map((item, index) => {
             const opacity =
               slide === index || 1 === gallery.length
@@ -49,7 +68,8 @@ const GalleryCarousel = ({ gallery }) => {
                 className={`${opacity} banner-img-container absolute top-0 left-0`}
               >
                 <img
-                  src={item?.mediaItemUrl}
+                  src={item?.sourceUrl}
+                  className="w-full"
                   loading="lazy"
                   alt={item?.altText ? item?.altText : item?.title}
                 />
@@ -57,7 +77,7 @@ const GalleryCarousel = ({ gallery }) => {
             );
           })}
           <div className="slider-button">
-            <button className="focus:outline-none" onClick={nextSlide}>
+            <button className="focus:outline-none" onClick={prevSlide}>
               <svg
                 width="25px"
                 className="inline-block mr-3"
@@ -92,7 +112,7 @@ const GalleryCarousel = ({ gallery }) => {
             }`}
             onClick={() => setSlide(index)}
             key={item.id}
-            src={item.mediaItemUrl}
+            src={item.sourceUrl}
             alt="Product Image"
           />
         ))}

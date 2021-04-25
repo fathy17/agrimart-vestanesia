@@ -4,21 +4,23 @@ import { useContext, useState } from 'react';
 import Modal from './Modal';
 import CartItemsContainer from './cart/cart-page/CartItemsContainer';
 import { AppContext } from './context/AppContext';
+import { useRouter } from 'next/router';
 
 const Nav = ({ sticky }) => {
   const [isMenuVisible, setMenuVisibility] = useState(false);
   const [modal, setModal] = useState(false);
   const [cart] = useContext(AppContext);
+  const router = useRouter();
   return (
     <>
       <nav
-        className={` bg-white p-4 w-full z-40 shadow ${
-          sticky ? 'fixed top-0 left-0 bg-opacity-75' : 'absolute '
+        className={` bg-white py-4 px-8 w-full z-40 shadow ${
+          sticky ? 'fixed top-0 left-0 bg-opacity-95' : 'absolute '
         }`}
       >
         <div className="flex items-center justify-between flex-wrap container mx-auto">
-          <div className="flex items-center flex-shrink-0 text-black mr-20">
-            <svg
+          <div className="flex items-center flex-shrink-0 text-black lg:mr-20">
+            {/* <svg
               className="fill-current h-8 w-8 mr-2 text-primary"
               width="54"
               height="54"
@@ -31,11 +33,26 @@ const Nav = ({ sticky }) => {
               <Link href="/">
                 <a className="text-primary">LOGO</a>
               </Link>
-            </span>
+            </span> */}
+            <img
+              className="w-24"
+              src="/logo Vestanesia Agrimart.png"
+              alt="Vestanesia Agrimart"
+            />
           </div>
 
           {/*Menu button*/}
-          <div className="block lg:hidden">
+          <div className="flex lg:hidden">
+            <div className="text-sm font-medium flex items-center mt-0 lg:mr-10 mr-4">
+              <div
+                onClick={() => {
+                  setModal(true);
+                }}
+                className="cursor-pointer"
+              >
+                <CartIcon />
+              </div>
+            </div>
             <button
               onClick={() => setMenuVisibility(!isMenuVisible)}
               className="flex items-center px-3 py-2 border rounded text-black border-black hover:text-black hover:border-black"
@@ -59,47 +76,53 @@ const Nav = ({ sticky }) => {
           >
             <div className="text-sm font-medium lg:flex-grow">
               <Link href="/">
-                <a className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10">
+                <a
+                  className={`${
+                    router.pathname === '/' ? 'text-primary' : ''
+                  } block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10`}
+                >
                   Beranda
                 </a>
               </Link>
               <Link href="/kategori/semua-produk?sort=DATE">
-                <a className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10">
+                <a
+                  className={`${
+                    router.pathname.includes('/kategori') ? 'text-primary' : ''
+                  } block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10`}
+                >
                   Produk
                 </a>
               </Link>
               <Link href="/jadi-member">
-                <a className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10">
+                <a
+                  className={`${
+                    router.pathname === '/jadi-member' ? 'text-primary' : ''
+                  } block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10`}
+                >
                   Jadi Member
                 </a>
               </Link>
               <Link href="/konsultasi">
-                <a className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10">
+                <a
+                  className={`${
+                    router.pathname === '/konsultasi' ? 'text-primary' : ''
+                  } block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10`}
+                >
                   Konsultasi
                 </a>
               </Link>
-              <Link href="/wishlist">
-                <a className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10">
+              {/* <Link href="/wishlist">
+                <a
+                  className={`${
+                    router.pathname === '/wishlist' ? 'text-primary' : ''
+                  } block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-10`}
+                >
                   Wishlist
                 </a>
-              </Link>
+              </Link> */}
             </div>
 
-            <div className="text-sm font-medium flex items-center md:mt-0 mt-4">
-              <div className="border rounded p-2 mr-4 hover:bg-gray-100 cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
+            <div className="hidden text-sm font-medium lg:flex lg:items-center lg:mt-0 ">
               <div
                 onClick={() => {
                   setModal(true);

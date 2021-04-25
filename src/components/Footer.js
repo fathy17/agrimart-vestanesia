@@ -1,9 +1,13 @@
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import GET_CATEGORIES_QUERY from '../queries/get-categories';
+import MEMBER_PRODUCTS_QUERY from '../queries/get-member-products';
 import client from './ApolloClient';
+import BadgeLeft from './icons/BadgeLeft';
 
 const Footer = () => {
   const [categories, setCategories] = useState([]);
+  const [memberProducts, setMemberProducts] = useState([]);
 
   async function fetchCategories() {
     const { data } = await client.query({
@@ -12,36 +16,53 @@ const Footer = () => {
     setCategories(data?.productCategories?.nodes || []);
   }
 
+  async function fetchMemberProducts() {
+    const { data } = await client.query({
+      query: MEMBER_PRODUCTS_QUERY,
+    });
+    setMemberProducts(data?.products?.nodes || []);
+  }
+
   useEffect(() => {
     fetchCategories();
+    fetchMemberProducts();
   }, []);
 
   return (
     <>
       {/*Top Seller*/}
-      <div className="mx-auto px-4 xl:px-0 lg:mx-56 my-16">
+      <div className="container mx-auto px-4 xl:px-56 my-16">
         <hr className="w-full my-6 border-t-2 border-black border-dashed" />
         <h1 className="text-4xl font-semibold mb-4">PAKET MEMBER</h1>
-        <div
-          className="md:flex border-4 border-gray rounded-lg"
-          style={{ width: 'fit-content' }}
-        >
-          <img
-            src="https://miro.medium.com/max/2800/0*UsAnHuCnx28okGKf"
-            alt=""
-            className="w-full md:w-48 h-48 object-cover md:rounded-l-lg"
-          />
-          <div className="p-4 flex flex-col justify-between">
-            <h1 className="mb-4 md:mb-0 text-2xl md:text-4xl font-bold">
-              6x AMIFIT CAPSULE
-            </h1>
-            <div className="md:self-end text-3xl font-bold text-primary">
-              Rp. 1.050.000,-
-            </div>
-          </div>
-        </div>
+        {memberProducts.map((item) => (
+          <Link key={item.id} href={`/produk/${item.slug}`}>
+            <a>
+              <div
+                className="md:flex border-4 border-gray rounded-lg relative"
+                style={{ width: 'fit-content' }}
+              >
+                <div className="badge-left">
+                  <BadgeLeft size={90} />
+                </div>
+                <img
+                  src={item.image.sourceUrl}
+                  alt=""
+                  className="w-full md:w-48 h-48 object-contain md:rounded-l-lg bg-gray-100"
+                />
+                <div className="p-4 flex flex-col justify-between">
+                  <h1 className="mb-4 md:mb-0 text-2xl md:text-4xl font-bold">
+                    {item.name}
+                  </h1>
+                  <div className="md:self-end text-3xl font-bold text-primary">
+                    {item.price}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </Link>
+        ))}
       </div>
-      <div className="footer bg-gray-100 p-6 text-black lg:px-56">
+      <div className="footer bg-gray-100 p-6 text-black xl:px-56">
         <div className="container mx-auto md:grid grid-cols-4 gap-8">
           <div className="footer-text">
             <h4 className="font-semibold border-l-4 pl-4 md:mt-0 mt-4 border-primary">
@@ -100,16 +121,26 @@ const Footer = () => {
                     key={item.id}
                     className="text-xs list-disc mb-2 cursor-pointer "
                   >
-                    <p className="hover:text-primary font-semibold">
-                      {item.name}
-                    </p>
+                    <Link href={`/kategori/${item.slug}?sort=DATE`}>
+                      <a>
+                        <p className="hover:text-primary font-semibold">
+                          {item.name}
+                        </p>
+                      </a>
+                    </Link>
                     <ul className="ml-4 mt-2">
                       {item.children.nodes.map((child) => (
                         <li
                           key={child.id}
-                          className="text-xs list-disc mb-2 cursor-pointer hover:text-primary"
+                          className="text-xs list-disc mb-2 cursor-pointer "
                         >
-                          {child.name}
+                          <Link href={`/kategori/${child.slug}?sort=DATE`}>
+                            <a>
+                              <p className="hover:text-primary ">
+                                {child.name}
+                              </p>
+                            </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -121,7 +152,9 @@ const Footer = () => {
       </div>
       <div className="w-full lg:px-56 bg-gray-600 text-gray-100 text-xs py-3 text-center">
         A Premium React Theme by{' '}
-        <span className="text-primary cursor-pointer">Fathy Fahrezy</span>
+        <a href="https://ftyproject.xyz/" target="_blank">
+          <span className="text-primary cursor-pointer">Fathy Fahrezy</span>
+        </a>
       </div>
     </>
   );

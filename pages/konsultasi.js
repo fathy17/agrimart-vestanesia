@@ -18,7 +18,7 @@ export default function konsultasi() {
             Masukkan kupon member untuk berkonsultasi
           </label>
           <input
-            className="border-2 rounded w-full px-2 border-gray-500"
+            className="block border-2 rounded w-full md:w-2/4 px-2 border-gray-500"
             type="text"
             placeholder="Cth: FAHMI1234(Terdiri dari nama dan 4 no. referral"
           />

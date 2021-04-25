@@ -20,7 +20,7 @@ export const PRODUCT_BY_SLUG_QUERY = gql`
           id
           title
           altText
-          mediaItemUrl
+          sourceUrl
         }
       }
       image {
@@ -28,6 +28,7 @@ export const PRODUCT_BY_SLUG_QUERY = gql`
         uri
         title
         srcSet
+        altText
         sourceUrl
       }
       name

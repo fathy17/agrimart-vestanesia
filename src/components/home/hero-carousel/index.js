@@ -12,7 +12,6 @@ const HeroCarousel = ({ heroCarousel }) => {
   const activeIndexRef = useRef({ activeIndex: 0 });
   const slideRef = useRef(0);
   const [slide, setSlide] = useState(0);
-  const [restartSlide, setRestartSlide] = useState(0);
   const { activeIndex } = activeIndexRef.current;
 
   /**
@@ -30,7 +29,6 @@ const HeroCarousel = ({ heroCarousel }) => {
      */
     if (activeIndexRef.current.activeIndex === heroCarousel.length - 1) {
       activeIndexRef.current.activeIndex = 0;
-      setRestartSlide(restartSlide + 1);
     } else {
       // If its not the last slide increment active index by one.
       activeIndexRef.current.activeIndex =
@@ -38,6 +36,31 @@ const HeroCarousel = ({ heroCarousel }) => {
     }
 
     slideRef.current = slideRef.current + 1;
+    setSlide(slideRef.current);
+  };
+
+  /**
+   * Change to prev slide.
+   */
+  const prevSlide = () => {
+    if (1 === heroCarousel.length) {
+      return null;
+    }
+
+    /**
+     * If if autoplay is set to true
+     * and all slides are finished playing,
+     * set the activeIndex to one and restart the slide from start.
+     */
+    if (activeIndexRef.current.activeIndex === 0) {
+      activeIndexRef.current.activeIndex = heroCarousel.length - 1;
+    } else {
+      // If its not the last slide increment active index by one.
+      activeIndexRef.current.activeIndex =
+        activeIndexRef.current.activeIndex - 1;
+    }
+
+    slideRef.current = slideRef.current - 1;
     setSlide(slideRef.current);
   };
 
@@ -49,7 +72,7 @@ const HeroCarousel = ({ heroCarousel }) => {
   }, []);
 
   return (
-    <div className="banner flex flex-col sm:flex-row justify-between overflow-hidden mt-20 lg:mx-56">
+    <div className="banner flex flex-col sm:flex-row justify-between overflow-hidden mt-20 xl:mx-56">
       <div className="banner-img w-full h-60">
         {heroCarousel.map((item, index) => {
           const opacity =
@@ -71,7 +94,7 @@ const HeroCarousel = ({ heroCarousel }) => {
           );
         })}
         <div className="slider-button">
-          <button className="focus:outline-none" onClick={nextSlide}>
+          <button className="focus:outline-none" onClick={prevSlide}>
             <svg
               width="25px"
               className="inline-block mr-3"

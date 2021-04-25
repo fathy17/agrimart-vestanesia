@@ -1,29 +1,25 @@
 import { gql } from '@apollo/client';
 
-/**
- * GraphQL categories and products query.
- */
-const GET_TOPSELL_QUERY = gql`
+const MEMBER_PRODUCTS_QUERY = gql`
   query {
-    products(where: { orderby: { field: TOTAL_SALES } }, first: 4) {
+    products(where: { tag: "member" }) {
       nodes {
         id
-        databaseId
-        onSale
         averageRating
+        onSale
         slug
         description
-        productCategories {
-          nodes {
-            name
-          }
-        }
         image {
           id
           uri
           title
           srcSet
           sourceUrl
+        }
+        productCategories {
+          nodes {
+            name
+          }
         }
         name
         ... on SimpleProduct {
@@ -59,4 +55,4 @@ const GET_TOPSELL_QUERY = gql`
   }
 `;
 
-export default GET_TOPSELL_QUERY;
+export default MEMBER_PRODUCTS_QUERY;

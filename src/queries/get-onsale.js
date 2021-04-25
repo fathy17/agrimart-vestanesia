@@ -5,10 +5,11 @@ import { gql } from '@apollo/client';
  */
 const GET_ONSALE_QUERY = gql`
   query {
-    products(where: { onSale: true }, first: 4) {
+    products(where: { featured: true }, first: 4) {
       nodes {
         id
-        id
+        databaseId
+        onSale
         averageRating
         slug
         description
