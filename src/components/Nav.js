@@ -34,11 +34,15 @@ const Nav = ({ sticky }) => {
                 <a className="text-primary">LOGO</a>
               </Link>
             </span> */}
-            <img
-              className="w-24"
-              src="/logo Vestanesia Agrimart.png"
-              alt="Vestanesia Agrimart"
-            />
+            <Link href="/">
+              <a>
+                <img
+                  className="w-24"
+                  src="/logo Vestanesia Agrimart.png"
+                  alt="Vestanesia Agrimart"
+                />
+              </a>
+            </Link>
           </div>
 
           {/*Menu button*/}

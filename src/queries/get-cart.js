@@ -9,6 +9,9 @@ const GET_CART = gql`
         name
         total
       }
+      appliedCoupons {
+        code
+      }
       availableShippingMethods {
         rates {
           cost

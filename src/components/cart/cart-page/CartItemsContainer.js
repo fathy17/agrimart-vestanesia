@@ -203,7 +203,7 @@ const CartItemsContainer = () => {
       ) : (
         <div className="text-center">
           <h2 className="text-2xl mb-5">Keranjang anda kosong.</h2>
-          <Link href="/">
+          <Link href="/kategori/semua-produk/?sort=DATE">
             <button className="bg-primary text-white px-5 py-3 rounded-sm">
               <span className="woo-next-cart-checkout-txt">
                 Tambah produk baru

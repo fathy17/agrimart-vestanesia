@@ -15,6 +15,7 @@ import { v4 } from 'uuid';
 import UPDATE_SHIPPING_METHOD_MUTATION from '../../mutations/update-shipping-method';
 import { useRouter } from 'next/router';
 import Error from './Error';
+import APPLY_COUPON_MUTATION from '../../mutations/apply-coupon';
 
 const CheckoutForm = () => {
   const initialState = {
@@ -34,6 +35,7 @@ const CheckoutForm = () => {
     errors: null,
     shippingMethod: null,
     customerNote: '',
+    coupon: '',
   };
 
   const router = useRouter();
@@ -51,6 +53,7 @@ const CheckoutForm = () => {
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);
       localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
+      setInput({ ...input, coupon: data.cart.appliedCoupons?.[0]?.code });
 
       // Update cart data in React Context.
       setCart(updatedCart);
@@ -88,10 +91,26 @@ const CheckoutForm = () => {
     },
   });
 
-  // Add Fee Mutation
+  // Update Shipping Mutation
   const [updateShippingMethod, { loading: shipingMethodLoading }] = useMutation(
     UPDATE_SHIPPING_METHOD_MUTATION,
     {
+      onCompleted: () => {
+        refetch();
+      },
+      onError: (error) => {
+        if (error) {
+          setError(error?.graphQLErrors?.[0]?.message);
+        }
+      },
+    }
+  );
+
+  // Use Coupon Mutation
+  const [useCoupon, { loading: useCouponLoading }] = useMutation(
+    APPLY_COUPON_MUTATION,
+    {
+      variables: { input: { code: input.coupon } },
       onCompleted: () => {
         refetch();
       },
@@ -225,12 +244,38 @@ const CheckoutForm = () => {
   return (
     <>
       <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-20 gap-10">
-        {/*Billing Details*/}
-        <form onSubmit={handleFormSubmit} className="woo-next-checkout-form">
-          <div className="billing-details">
-            <Billing input={input} handleOnChange={handleOnChange} />
+        <div>
+          {/*Billing Details*/}
+          <form onSubmit={handleFormSubmit} className="woo-next-checkout-form">
+            <div className="billing-details">
+              <Billing input={input} handleOnChange={handleOnChange} />
+            </div>
+          </form>
+          {/* Coupon */}
+          <div>
+            <label className="font-semibold">Masukkan kupon member</label>
+            <div className="flex">
+              <input
+                type="text"
+                name="coupon"
+                className="form-control woo-next-checkout-input p-1 w-full border-solid border border-gray-500 rounded"
+                onChange={handleOnChange}
+                id="coupon"
+                value={input.coupon}
+              />
+              <button
+                onClick={() => {
+                  if (input.coupon) {
+                    useCoupon();
+                  }
+                }}
+                className="px-8 ml-4 border border-primary rounded text-primary hover:bg-primary hover:text-white"
+              >
+                Pakai
+              </button>
+            </div>
           </div>
-        </form>
+        </div>
         {/* Order & Payments*/}
         <div className="your-orders">
           <div className="flex mb-4 items-center">

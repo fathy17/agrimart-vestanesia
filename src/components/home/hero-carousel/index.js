@@ -89,6 +89,7 @@ const HeroCarousel = ({ heroCarousel }) => {
                 srcSet={item?.image?.srcSet}
                 loading="lazy"
                 className="object-contain lg:object-cover h-60"
+                alt={item?.image?.altText}
               />
             </div>
           );

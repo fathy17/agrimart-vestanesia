@@ -52,6 +52,19 @@ const YourOrder = ({ cart }) => {
                   {cart.shippingTotal}
                 </td>
               </tr>
+              {/*Pengiriman*/}
+              {cart.discountTotal !== 'Rp0' && (
+                <tr className="bg-gray-200">
+                  <td className="py-2" />
+                  <td className="woo-next-checkout-total font-normal text-xl py-2">
+                    Diskon
+                  </td>
+                  <td className="woo-next-checkout-total font-normal text-xl"></td>
+                  <td className="woo-next-checkout-total font-semibold text-xl text-right pr-4">
+                    {cart.discountTotal}
+                  </td>
+                </tr>
+              )}
               {/*Total*/}
               <tr className="bg-gray-200">
                 <td className="py-2" />

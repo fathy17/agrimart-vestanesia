@@ -27,22 +27,22 @@ export default function Product(props) {
   return (
     <>
       <NextSeo
-        title={product.seo.title}
-        description={product.seo.metaDesc}
-        canonical={product.seo.canonical}
+        title={product.seo?.title}
+        description={product.seo?.metaDesc}
+        canonical={product.seo?.canonical}
         openGraph={{
-          url: product.seo.opengraphUrl,
-          title: product.seo.opengraphtitle,
-          description: product.seo.opengraphDescription,
+          url: product.seo?.opengraphUrl,
+          title: product.seo?.opengraphtitle,
+          description: product.seo?.opengraphDescription,
           images: [
             {
-              url: product.seo.opengraphImage.sourceUrl,
+              url: product.seo?.opengraphImage?.sourceUrl,
               width: 800,
               height: 600,
-              alt: product.seo.opengraphImage.altText,
+              alt: product.seo?.opengraphImage?.altText,
             },
           ],
-          site_name: product.seo.title,
+          site_name: product.seo?.title,
         }}
       />
       <ProductJsonLd
@@ -65,7 +65,7 @@ export default function Product(props) {
             priceValidUntil: '2099-11-05',
             itemCondition: 'https://schema.org/NewCondition',
             availability: 'https://schema.org/InStock',
-            url: product.seo.canonical,
+            url: product.seo?.canonical,
             seller: {
               name: 'Vestanesia Agrimart',
             },

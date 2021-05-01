@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function BadgeLeft({ size }) {
+export default function BadgeLeft({ size, className }) {
   return (
     <svg
       width={size}

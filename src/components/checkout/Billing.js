@@ -76,7 +76,7 @@ const Billing = ({ input, handleOnChange }) => {
           onChange={handleOnChange}
           value={input.address1}
           name="address1"
-          placeholder="House number and street name"
+          placeholder="Nama jalan dan alamat lengkap"
           className="form-control woo-next-checkout-input p-1 w-full border-solid border border-gray-500 rounded mb-3"
           id="street-address"
         />
@@ -87,7 +87,7 @@ const Billing = ({ input, handleOnChange }) => {
           onChange={handleOnChange}
           value={input.address2}
           name="address2"
-          placeholder="Apartment, suite, unit etc.(optional)"
+          placeholder="Keterangan rumah, apartemen atau lainnya."
           className="form-control woo-next-checkout-input p-1 w-full border-solid border border-gray-500 rounded"
           id="subdistrict"
         />

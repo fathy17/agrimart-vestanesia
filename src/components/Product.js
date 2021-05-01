@@ -4,6 +4,7 @@ import clientConfig from '../../client-config';
 import { isEmpty } from 'lodash';
 import Price from './single-product/price';
 import BadgeRight from './icons/BadgeRight';
+import BadgeLeft from './icons/BadgeLeft';
 
 const Product = (props) => {
   const { product } = props;
@@ -17,6 +18,11 @@ const Product = (props) => {
             <BadgeRight size={90} />
           </div>
         ) : null}
+        {product?.productTags?.nodes?.[0]?.name === 'member' ? (
+          <div className="badge-right" style={{ transform: 'rotate(90deg)' }}>
+            <BadgeLeft size={90} />
+          </div>
+        ) : null}
         <Link href={`/produk/${product.slug}`}>
           <a>
             {!isEmpty(product.image) ? (
@@ -24,9 +30,11 @@ const Product = (props) => {
                 className="rounded-t-md bg-gray-100"
                 src={product.image.sourceUrl}
                 alt="Product image"
+                loading="lazy"
               />
             ) : !isEmpty(clientConfig.productImagePlaceholder) ? (
               <img
+                loading="lazy"
                 className="rounded-t-md bg-gray-100"
                 src={clientConfig.productImagePlaceholder}
                 alt="Placeholder product image"

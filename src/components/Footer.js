@@ -33,7 +33,7 @@ const Footer = () => {
       {/*Top Seller*/}
       <div className="container mx-auto px-4 xl:px-56 my-16">
         <hr className="w-full my-6 border-t-2 border-black border-dashed" />
-        <h1 className="text-4xl font-semibold mb-4">PAKET MEMBER</h1>
+        <h1 className="text-4xl font-semibold mb-4">PAKET RESELLER</h1>
         {memberProducts.map((item) => (
           <Link key={item.id} href={`/produk/${item.slug}`}>
             <a>
@@ -54,7 +54,12 @@ const Footer = () => {
                     {item.name}
                   </h1>
                   <div className="md:self-end text-3xl font-bold text-primary">
-                    {item.price}
+                    <div className="product-regular-price line-through font-semibold text-xl">
+                      {item.regularPrice}
+                    </div>
+                    <div className="product-price text-primary font-bold">
+                      {item.price}
+                    </div>
                   </div>
                 </div>
               </div>

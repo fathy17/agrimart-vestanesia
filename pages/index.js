@@ -52,22 +52,12 @@ export default function Home(props) {
           {/* Feature */}
           <div className="products container mx-auto my-12 md:my-16 p-4 xl:px-56 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8 sm:gap-4 gap-4">
             <div className="flex flex-col items-center text-center">
-              <div className="text-primary w-12 h-12 flex justify-center items-center rounded-full p-2 border-primary border-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
-              </div>
+              <img
+                loading="lazy"
+                src="/phone.png"
+                alt="phone - Vestanesia Agrimart"
+                className="h-14 w-14"
+              />
               <h3 className="text-xl font-semibold my-4">
                 24 Jam Customer Care
               </h3>
@@ -78,48 +68,28 @@ export default function Home(props) {
               </p>
             </div>
             <div className="flex flex-col items-center text-center">
-              <div className="text-primary w-12 h-12 flex justify-center items-center rounded-full p-2 border-primary border-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
-              </div>
+              <img
+                loading="lazy"
+                src="/handshake.png"
+                alt="handshake - Vestanesia Agrimart"
+                className="h-14 w-14"
+              />
               <h3 className="text-xl font-semibold my-4">
                 Mendukung Produk Lokal
               </h3>
               <p>
                 Vestanesia Agrimart menawarkan produk hasil pertanian lokal
-                dalam rangka mendukung distribusikomoditas pertanian yang
+                dalam rangka mendukung distribus ikomoditas pertanian yang
                 efisien.
               </p>
             </div>
             <div className="flex flex-col items-center text-center">
-              <div className="text-primary w-12 h-12 flex justify-center items-center rounded-full p-2 border-primary border-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
-              </div>
+              <img
+                loading="lazy"
+                src="/Indonesia.png"
+                alt="Indonesia - Vestanesia Agrimart"
+                className="h-14 w-14"
+              />
               <h3 className="text-xl font-semibold my-4">
                 Pengiriman Ke Seluruh Indonesia.
               </h3>
@@ -129,22 +99,12 @@ export default function Home(props) {
               </p>
             </div>
             <div className="flex flex-col items-center text-center">
-              <div className="text-primary w-12 h-12 flex justify-center items-center rounded-full p-2 border-primary border-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
-              </div>
+              <img
+                loading="lazy"
+                src="/bantupetani.png"
+                alt="#bantupetani - Vestanesia Agrimart"
+                className="h-14 w-14"
+              />
               <h3 className="text-xl font-semibold my-4">
                 Bantu Petani Indonesia
               </h3>
@@ -175,6 +135,7 @@ export default function Home(props) {
           {/* Promo */}
           <div className="container text-center mx-auto md:my-24 relative">
             <img
+              loading="lazy"
               src="https://www.deliveree.com/id/wp-content/uploads/sites/2/2016/05/mobil-engkel-box-fast-delivery-jabodetabek-og.jpg"
               alt=""
               className="w-full object-cover"
@@ -211,6 +172,7 @@ export default function Home(props) {
           <div className="container mx-auto my-16 p-4 xl:px-56 w-full">
             <div className="relative ">
               <img
+                loading="lazy"
                 src="https://miro.medium.com/max/2800/0*UsAnHuCnx28okGKf"
                 alt=""
                 className="w-full rounded-3xl object-cover"

@@ -27,29 +27,6 @@ const MEMBER_PRODUCTS_QUERY = gql`
           regularPrice
           id
         }
-        ... on VariableProduct {
-          price
-          id
-          regularPrice
-        }
-        ... on ExternalProduct {
-          price
-          id
-          externalUrl
-          regularPrice
-        }
-        ... on GroupProduct {
-          id
-          products {
-            nodes {
-              ... on SimpleProduct {
-                id
-                price
-                regularPrice
-              }
-            }
-          }
-        }
       }
     }
   }

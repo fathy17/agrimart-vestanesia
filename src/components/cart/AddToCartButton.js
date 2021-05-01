@@ -122,21 +122,21 @@ const AddToCart = (props) => {
         <a
           href={product.externalUrl}
           target="_blank"
-          className="px-4 py-2 font-semibold rounded-sm mr-3 text-sm bg-primary hover:bg-green-600 inline-block  text-white"
+          className="px-4 py-2 font-semibold rounded-sm mr-3 text-sm bg-primary hover:bg-yellow-500 inline-block  text-white"
         >
           Buy now
         </a>
       ) : (
         <button
           onClick={handleAddToCartClick}
-          className="px-4 py-2 font-semibold rounded-sm mr-3 text-sm bg-primary hover:bg-green-600  text-white"
+          className="px-4 py-2 font-semibold rounded-sm mr-3 text-sm bg-primary hover:bg-yellow-500  text-white"
         >
           {addToCartLoading ? <Loader size={16} /> : 'Tambahkan ke keranjang'}
         </button>
       )}
       {/* {showViewCart ? (
         <Link href="/cart">
-          <button className="px-4 py-2 font-semibold rounded-sm text-sm bg-primary hover:bg-green-600 inline-block  text-white">
+          <button className="px-4 py-2 font-semibold rounded-sm text-sm bg-primary hover:bg-yellow-500 inline-block  text-white">
             View Cart
           </button>
         </Link>

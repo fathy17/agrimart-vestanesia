@@ -9,6 +9,11 @@ const ALL_PRODUCTS_QUERY = gql`
         onSale
         slug
         description
+        productTags {
+          nodes {
+            name
+          }
+        }
         image {
           id
           uri
@@ -26,29 +31,6 @@ const ALL_PRODUCTS_QUERY = gql`
           price
           regularPrice
           id
-        }
-        ... on VariableProduct {
-          price
-          id
-          regularPrice
-        }
-        ... on ExternalProduct {
-          price
-          id
-          externalUrl
-          regularPrice
-        }
-        ... on GroupProduct {
-          id
-          products {
-            nodes {
-              ... on SimpleProduct {
-                id
-                price
-                regularPrice
-              }
-            }
-          }
         }
       }
     }
