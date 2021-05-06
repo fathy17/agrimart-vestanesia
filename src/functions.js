@@ -7,10 +7,9 @@ import { v4 } from 'uuid';
  * @return {any}
  */
 export const getFloatVal = (string) => {
-  let floatValue = string.match(/[+-]?\d+(\.\d+)?/g)[0];
-  return null !== floatValue
-    ? parseFloat(parseFloat(floatValue).toFixed(2))
-    : '';
+  let floatValue = string.split('Rp')[1];
+  // console.log(parseFloat(floatValue.split('.').join('')));
+  return null !== floatValue ? parseFloat(floatValue.split('.').join('')) : '';
 };
 
 /**
@@ -246,7 +245,7 @@ export const getFormattedCart = (data) => {
 
   formattedCart.shippingTotal = data.cart.shippingTotal;
   formattedCart.discountTotal = data.cart.discountTotal;
-  formattedCart.appliedCoupons = data.cart.appliedCoupons.code;
+  // formattedCart.appliedCoupons = data.cart.appliedCoupons[0].code;
   formattedCart.shippingMethods =
     data.cart?.availableShippingMethods?.[0]?.rates || [];
   formattedCart.totalProductsCount = totalProductsCount;

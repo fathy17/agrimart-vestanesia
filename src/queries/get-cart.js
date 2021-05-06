@@ -38,6 +38,11 @@ const GET_CART = gql`
               slug
               averageRating
               reviewCount
+              productTags {
+                nodes {
+                  slug
+                }
+              }
               image {
                 id
                 sourceUrl

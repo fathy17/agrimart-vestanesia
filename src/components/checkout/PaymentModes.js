@@ -1,6 +1,7 @@
 import Error from './Error';
 
 const PaymentModes = ({ input, handleOnChange }) => {
+  console.log(input.memberPackage);
   return (
     <div className="mt-3">
       <Error errors={input.errors} fieldName={'paymentMethod'} />
@@ -14,7 +15,7 @@ const PaymentModes = ({ input, handleOnChange }) => {
             name="paymentMethod"
             type="radio"
           />
-          <span className="woo-next-payment-content">
+          <span className="woo-next-payment-content cursor-pointer">
             Transfer dengan bank BNI
           </span>
         </label>
@@ -28,8 +29,20 @@ const PaymentModes = ({ input, handleOnChange }) => {
             className="form-check-input mr-3"
             name="paymentMethod"
             type="radio"
+            disabled={input.memberPackage}
           />
-          <span className="woo-next-payment-content">
+          <span
+            title={
+              input.memberPackage
+                ? 'Pembayaran pembelian paket member tidak bisa menggunakan virtual account'
+                : ''
+            }
+            className={`woo-next-payment-content ${
+              input.memberPackage
+                ? 'text-gray-500 cursor-not-allowed'
+                : 'cursor-pointer'
+            }`}
+          >
             Bayar dengan virtual account
           </span>
         </label>

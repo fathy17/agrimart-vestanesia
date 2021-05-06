@@ -11,6 +11,14 @@ const Nav = ({ sticky }) => {
   const [modal, setModal] = useState(false);
   const [cart] = useContext(AppContext);
   const router = useRouter();
+
+  const cartWaText = `Total : ${cart?.totalProductsPrice}
+  ${cart?.products?.map(
+    (item) => ` | ${item.qty}x ${item.name} (${item.totalPrice})`
+  )}`;
+
+  // console.log(cartWaText);
+
   return (
     <>
       <nav
@@ -145,13 +153,28 @@ const Nav = ({ sticky }) => {
         content={<CartItemsContainer />}
         footer={
           cart ? (
-            <Link href="/checkout">
-              <a>
-                <button className="px-8 py-2 w-full font-semibold bg-primary text-white rounded hover:bg-yellow-500">
-                  Checkout
-                </button>
-              </a>
-            </Link>
+            <>
+              <Link href="/checkout">
+                <a>
+                  <button className="px-8 py-2 w-full font-semibold bg-primary text-white rounded hover:bg-yellow-500">
+                    Checkout
+                  </button>
+                </a>
+              </Link>
+              <div className="text-xs mt-2">
+                Checkout melalui{' '}
+                <a
+                  target="_blank"
+                  href={`https://wa.me/+6281342217536?text=${encodeURI(
+                    cartWaText
+                  )}`}
+                  className="text-primary font-semibold hover:underline"
+                >
+                  WhatsApp
+                </a>{' '}
+                ?
+              </div>
+            </>
           ) : null
         }
         onClose={() => setModal(false)}

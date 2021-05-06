@@ -17,8 +17,8 @@ const Price = ({ regularPrice = 0, salesPrice }) => {
       return null;
     }
 
-    const formattedRegularPrice = getFloatVal(regularPrice?.substring(1));
-    const formattedSalesPrice = getFloatVal(salesPrice?.substring(1));
+    const formattedRegularPrice = getFloatVal(regularPrice);
+    const formattedSalesPrice = getFloatVal(salesPrice);
 
     const discountPercent =
       ((formattedRegularPrice - formattedSalesPrice) / formattedRegularPrice) *

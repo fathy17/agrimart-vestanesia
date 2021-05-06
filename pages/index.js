@@ -193,7 +193,7 @@ export default function Home(props) {
                 <a href="https://vestanesia.com/" target="_blank">
                   <div className="bg-primary  py-4 px-8 rounded-full cursor-pointer">
                     <h1 className="text-xl md:text-4xl font-semibold">
-                      https://vestanesia.com/
+                      vestanesia.com
                     </h1>
                   </div>
                 </a>

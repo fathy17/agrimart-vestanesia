@@ -5,7 +5,11 @@ import PaymentModes from './PaymentModes';
 import { AppContext } from '../context/AppContext';
 import validateAndSanitizeCheckoutForm from '../../validator/checkout';
 import { useMutation, useQuery } from '@apollo/client';
-import { getFormattedCart, createCheckoutData } from '../../functions';
+import {
+  getFormattedCart,
+  createCheckoutData,
+  getFloatVal,
+} from '../../functions';
 import GET_CART from '../../queries/get-cart';
 import { ErrorContext } from '../context/ErrorContext';
 import Loader from '../Loader';
@@ -36,6 +40,7 @@ const CheckoutForm = () => {
     shippingMethod: null,
     customerNote: '',
     coupon: '',
+    memberPackage: false,
   };
 
   const router = useRouter();
@@ -43,6 +48,7 @@ const CheckoutForm = () => {
   const [cart, setCart] = useContext(AppContext);
   const [_, setError] = useContext(ErrorContext);
   const [input, setInput] = useState(initialState);
+
   const [errorCheckout, setErrorCheckout] = useState(null);
 
   // Get Cart Data.
@@ -57,6 +63,11 @@ const CheckoutForm = () => {
 
       // Update cart data in React Context.
       setCart(updatedCart);
+
+      setInput({
+        ...input,
+        memberPackage: getFloatVal(data.cart.total) > 850000,
+      });
     },
   });
 
