@@ -9,6 +9,9 @@ export const PRODUCT_BY_SLUG_QUERY = gql`
       slug
       description
       date
+      informasiTambahan {
+        informasiTambahan
+      }
       shortDescription
       productCategories {
         nodes {

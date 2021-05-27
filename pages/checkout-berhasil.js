@@ -77,14 +77,14 @@ export default function CheckoutBerhasil() {
           <div className="mt-4 flex justify-around w-full">
             <Link href="/jadi-member">
               <a>
-                <button className="rounded-full text-xl bg-primary text-white px-8 font-semibold italic">
+                <button className="rounded-full text-xl bg-primary text-white py-1 lg:py-2 px-8 font-semibold italic">
                   Jadi Member
                 </button>
               </a>
             </Link>
             <Link href="/produk/6x-amivit-capsule/">
               <a>
-                <button className="rounded-full text-xl bg-primary text-white py-2 px-8 font-semibold italic">
+                <button className="rounded-full text-xl bg-primary text-white py-1 lg:py-2 px-8 font-semibold italic">
                   Jadi Reseller
                 </button>
               </a>

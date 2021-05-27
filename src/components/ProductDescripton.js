@@ -19,30 +19,11 @@ export default function ProductDescripton({ product }) {
         );
       case 'Informasi Tambahan':
         return (
-          <div>
-            <h3 className="text-primary text-2xl font-semibold">
-              Kebijakan Pengembalian Produk
-            </h3>
-            <p>
-              Sebelum membuka paket yang telah diterima dihrapkan merekam
-              terlebih dahulu demi kepentingan retur barang, BILA TIDAK
-              MENYERTAKAN BUKTI VIDEO MAKA KLAIM BARANG TIDAK BERLAKU. Produk
-              masih tersegel, produk belum dibuka, atau belum terpakai sama
-              sekali langsung mengirimkan ke head office kami pada alamat
-              terlampir.
-            </p>
-            <br />
-            <h3 className="text-primary text-2xl font-semibold">
-              Jam Operasional Pengiriman
-            </h3>
-            <p>
-              Jadwal Pengiriman: Senin s.d. Sabtu. Senin - Jumat pukul 11.00 dan
-              15.30. Sabtu pukul 10.00 dan 13.30. Pick-Up pesanan pukul 11.00
-              dan jam 15.30. Apabila ada pesanan yang masuk di atas pukul 15.30,
-              akan diproses esok hari (jam kerja tersebut di atas). Untuk
-              orderan yang masuk sebelum jam 15.30 akan di proses langsung.
-            </p>
-          </div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: product.informasiTambahan?.informasiTambahan,
+            }}
+          />
         );
       case 'Penilaian Produk':
         return <ProductReview id={product.databaseId} />;

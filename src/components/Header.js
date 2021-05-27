@@ -1,13 +1,23 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ErrorContext } from './context/ErrorContext';
 import useSticky from './hooks/useSticky';
 import Nav from './Nav';
 import SnackBar from './snackbar/SnackBar';
 import { Facebook, Instagram, Twitter, Youtube } from './icons';
+import GET_FRONTPAGE_QUERY from '../queries/get-frontpage';
+import { useQuery } from '@apollo/client';
 
 const Header = () => {
   const [error, _] = useContext(ErrorContext);
   const { isSticky, element } = useSticky();
+  const [telp, setTelp] = useState('');
+
+  const { data } = useQuery(GET_FRONTPAGE_QUERY, {
+    onCompleted: () => {
+      setTelp(data?.extension?.frontPage?.noTelponCustomerService);
+    },
+  });
+
   return (
     <div>
       <div
@@ -15,7 +25,7 @@ const Header = () => {
         className="py-2 px-8 flex items-center border-b-2 border-dashed border-gray-700"
       >
         <small className="text-xs lg:text-base">
-          24/7 Customer Service: +6281 1422 0206
+          Customer Service (10.00 - 16.00 WITA): {telp}
         </small>
         <ul className="social-links flex align-center text-primary ml-4 md:ml-28 md:my-0 my-2">
           <li>

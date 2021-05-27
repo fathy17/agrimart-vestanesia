@@ -82,7 +82,7 @@ export const PRODUCT_BY_CATEGORY_SLUG = gql`
 
 export const PRODUCT_CATEGORIES_SLUGS = gql`
   query PRODUCT_CATEGORIES_SLUGS {
-    productCategories {
+    productCategories(where: { parent: 0 }) {
       nodes {
         id
         slug

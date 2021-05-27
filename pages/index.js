@@ -9,9 +9,10 @@ import HeroCarousel from '../src/components/home/hero-carousel';
 import GET_ONSALE_QUERY from '../src/queries/get-onsale';
 import { NextSeo } from 'next-seo';
 import GET_SEO from '../src/queries/get-seo';
+import GET_FRONTPAGE_QUERY from '../src/queries/get-frontpage';
 
 export default function Home(props) {
-  const { heroCarousel, onSale, seo } = props;
+  const { heroCarousel, onSale, seo, frontPage } = props;
 
   return (
     <>
@@ -136,7 +137,7 @@ export default function Home(props) {
           <div className="container text-center mx-auto md:my-24 relative">
             <img
               loading="lazy"
-              src="https://www.deliveree.com/id/wp-content/uploads/sites/2/2016/05/mobil-engkel-box-fast-delivery-jabodetabek-og.jpg"
+              src={frontPage.gambarBanner?.sourceUrl}
               alt=""
               className="w-full object-cover"
               style={{ height: '22rem' }}
@@ -145,27 +146,15 @@ export default function Home(props) {
               className="absolute top-0 w-full flex flex-col items-center justify-center bg-primary bg-opacity-75 text-white"
               style={{ height: '22rem' }}
             >
-              <svg
-                className="w-16"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
-                />
-              </svg>
-              <h1 className="text-2xl md:text-5xl font-bold py-8">
-                BISA KIRIM KE SELURUH INDONESIA
-              </h1>
-              <p className="text-lg md:text-xl">
-                Kami menyediakan pelayanan pengiriman ke seluruh indonesia
-              </p>
+              {frontPage.ikonBanner?.sourceUrl && (
+                <img src={frontPage.ikonBanner?.sourceUrl} alt="" />
+              )}
+              <div
+                className="banner-iklan"
+                dangerouslySetInnerHTML={{
+                  __html: frontPage.kontenBanner,
+                }}
+              />
             </div>
           </div>
           {/* Invest Feature */}
@@ -226,8 +215,13 @@ export async function getStaticProps() {
     query: GET_SEO,
   });
 
+  const frontPage = await client.query({
+    query: GET_FRONTPAGE_QUERY,
+  });
+
   return {
     props: {
+      frontPage: frontPage.data?.extension?.frontPage || {},
       seo: seo?.data?.seo || {},
       heroCarousel: data?.heroCarousel?.nodes[0]?.children?.nodes || [],
       onSale: onSale?.data?.products?.nodes || [],
