@@ -147,7 +147,11 @@ export default function Home(props) {
               style={{ height: '22rem' }}
             >
               {frontPage.ikonBanner?.sourceUrl && (
-                <img src={frontPage.ikonBanner?.sourceUrl} alt="" />
+                <img
+                  src={frontPage.ikonBanner?.sourceUrl}
+                  alt=""
+                  className="h-10"
+                />
               )}
               <div
                 className="banner-iklan"
